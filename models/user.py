@@ -16,6 +16,7 @@ class User(BaseModel, UserMixin, Base):
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
+        image_file = Column(String(20), nullable=False, default='default.jpg')
         tasks = relationship("Task", backref="user", cascade="all, delete-orphan")
     else:
         username = ""
