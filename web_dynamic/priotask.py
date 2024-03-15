@@ -32,7 +32,7 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
-    return render_template('101-hbnb.html')
+    return render_template('layout.html')
 
 @app.route("/about")
 def about():
