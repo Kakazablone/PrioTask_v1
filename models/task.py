@@ -13,6 +13,7 @@ class Task(BaseModel, Base):
     if models.storage_t == 'db':
         __tablename__ = 'tasks'
         task_id = Column(String(60), ForeignKey('user.id'), nullable=False)
+        content = Column(String(1024), nullable=False)
        
     else:
        pass

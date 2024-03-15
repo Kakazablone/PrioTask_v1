@@ -16,7 +16,7 @@ class User(BaseModel, Base):
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
-        tasks = relationship("Task", backref="user")
+        tasks = relationship("Task", backref="user", cascade="all, delete-orphan")
     else:
         email = ""
         password = ""
