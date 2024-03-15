@@ -3,16 +3,16 @@
 
 import models
 from models.base_model import BaseModel, Base
-import sqlalchemy
-from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
-from hashlib import md5
+from sqlalchemy import Column, String, ForeignKey
+from models.user import User
+
 
 
 class Task(BaseModel, Base):
     """Representation of a user """
     if models.storage_t == 'db':
-        __tablename__ = 'users'
+        __tablename__ = 'tasks'
+        task_id = Column(String(60), ForeignKey('user.id'), nullable=False)
        
     else:
        pass
