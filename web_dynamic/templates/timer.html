@@ -11,15 +11,21 @@
     <title>Priotask</title>
 </head>
 <body>
+    <div class="dashboard">
+        <span class="left">Home</span>
+        <span class="right">About</span>
+        <span class="right"><button>SignUP</button></span>
+        <span class="right"><button>Login</button></span>
+    </div>
      <section>
         <div class="container">
             <h1>PRIOTASK <span id="italic">productive focus</span></h1>
 
             <div class="panel">
-                <p id="pomodoro">Pomodoro</p>
-                <p id="shortbreak">Short break</p>
-                <p id="longbreak">Long Break</p>
-            </div>
+            <p id="pomodoro" onclick="selectTimer(25)" class="selected">Pomodoro</p>
+            <p id="shortbreak" onclick="selectTimer(5)">Short break</p>
+            <p id="longbreak" onclick="selectTimer(15)">Long Break</p>
+        </div>
 
             <div class="timer">
                 <div class="circle">

@@ -2,6 +2,10 @@ let timerInterval;
 let minutesRemaining = 25; // Initial value for countdown timer (25 minutes)
 let secondsRemaining = 0;
 
+$(document).ready(function () {
+  selectTimer(25); // Select "Pomodoro" on page load
+});
+
 function startTimer() {
   // Start the timer
   timerInterval = setInterval(updateTimer, 1000);
@@ -41,10 +45,17 @@ function updateTimer() {
 
 function updateDisplay() {
   // Update displayed minutes and seconds
-  let minutesElement = document.getElementById("minutes");
-  let secondsElement = document.getElementById("seconds");
-  minutesElement.innerText = formatTime(minutesRemaining);
-  secondsElement.innerText = formatTime(secondsRemaining);
+  let minutesElement = $("#minutes");
+  let secondsElement = $("#seconds");
+  minutesElement.text(formatTime(minutesRemaining));
+  secondsElement.text(formatTime(secondsRemaining));
+}
+
+// Function to select timer duration
+function selectTimer(minutes) {
+  minutesRemaining = minutes;
+  secondsRemaining = 0;
+  updateDisplay();
 }
 
 function formatTime(time) {
