@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link type="text/css" rel="stylesheet" href="../static/styles/timer.css">
+    <script type="text/javascript" src="../static/scripts/timer.js"></script>
+  
+    <title>Priotask</title>
+</head>
+<body>
+    <div class="dashboard">
+        <span class="left">Home</span>
+        <span class="right">About</span>
+        <span class="right"><button>SignUP</button></span>
+        <span class="right"><button>Login</button></span>
+    </div>
+     <section>
+        <div class="container">
+            <h1>PRIOTASK <span id="italic">productive focus</span></h1>
+            <div class="panel">
+                <p id="pomodoro" class="selected">Pomodoro</p>
+                <p id="shortbreak" class="selected">Short break</p>
+                <p id="longbreak" class="selected">Long Break</p>
+            </div>
+            <div class="timer">
+                <div class="circle">
+                    <div class="time">
+                        <p id="minutes"></p>
+                        <p>:</p>
+                        <p id="seconds"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="start" >Start</button>
+                <button id="pause">Pause</button>
+                <button id="stop">Stop</button>
+            </div>
+        </div>
+       
+    </section>
+
+
+</body>
+</html>
