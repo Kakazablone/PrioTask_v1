@@ -16,17 +16,18 @@
 .dashboard {
   background-color: var(--color-secondary);
   display: flex;
-  align-content: space-between;
+  justify-content: space-around;
+  align-content: center;
+  height: 5vh;
   align-items: center;
   font-size: medium;
   color: var(--color-font);
 }
-.left {
-  margin-right: auto;
+
+.dashboard a {
+  text-decoration: none;
 }
-.right {
-  margin-left: 30px;
-}
+
 .right button {
   color: var(--color-font);
   background-color: var(--color-primary);
@@ -40,11 +41,12 @@ body {
   height: 100%;
   background-color: var(--color-primary);
   font-size: 1.6rem;
-  font-family: "Open sans", sans-serif;
+  font-family: "Khand";
 }
 #italic {
   font-style: italic;
   font-size: medium;
+  color:var(--color-font);
 }
 
 p,
@@ -53,9 +55,10 @@ h1 {
 }
 .panel p.selected {
   color: aqua;
-  text-decoration: underline;
+  text-decoration: none;
 }
 button {
+  font-family: Madimi One;
   font-size: 3.2rem;
   margin: 10px;
   color: white;
@@ -100,6 +103,7 @@ section {
 .panel p {
   opacity: 0.8;
   transition: 1s ease-in;
+  text-decoration: none;
 }
 
 .panel p.active {
@@ -164,3 +168,112 @@ section {
   cursor: pointer;
 }
 
+
+.login-content-section {
+  display: block;
+  width: 25%;
+  height: auto;
+  background-color: lightcyan;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 15px 0;
+  max-width: auto;
+  margin-bottom: 0;
+}
+
+.account-content-sction{
+   display: block;
+  width: 25%;
+  height: auto;
+  background-color: lightcyan;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 15px 0;
+  max-width: auto;
+  margin-bottom: 0;
+}
+
+.register-content-section {
+  display: block;
+  width: 25%;
+  height: auto;
+  background-color: lightcyan;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 15px 0;
+  max-width: auto;
+  margin-bottom: 0;
+}
+
+fieldset {
+  border: none;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: dodgerblue;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
+
+.btn:hover {
+  background-color: #4CAF50;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  background-color: #45a049;
+}
+
+.text-muted a {
+  color: dodgerblue;
+  text-decoration: none;
+  margin-left: 3px;
+}
+
+.text-muted a:hover {
+  text-decoration: underline;
+}
+
+.border-top {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.text-muted {
+  display: inline-block;
+  color: white;
+}
+
+.alert {
+  color: white;
+  margin-top: 30px;
+}
+
+legend {
+  color: purple;
+  font-size: 30px;
+}

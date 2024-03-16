@@ -46,6 +46,7 @@ class RegistrationForm(FlaskForm):
         """This function is used to validate email input
         from user to avoid duplication
         """
+        email.data = email.data.lower()
         email = email.data
         users = storage.all(User)
         for user in users.values():
@@ -63,6 +64,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+    def validate_email(self, email):
+        email.data = email.data.lower() 
 
 
 class UpdateAccountForm(FlaskForm):
@@ -91,6 +95,7 @@ class UpdateAccountForm(FlaskForm):
     def validate_email(self, email):
         """This function is used to validate email input
         from user to avoid duplication"""
+        email.data = email.data.lower()
         if email.data != current_user.email:
             users = storage.all(User)
             for user in users.values():
