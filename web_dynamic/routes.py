@@ -42,7 +42,7 @@ def home():
     """The root endpoint, main section of the priotask
     web application
     """
-    return render_template('layout.html')
+    return render_template('timer.html')
 
 
 @app.route("/about")

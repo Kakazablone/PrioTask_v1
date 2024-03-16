@@ -1,52 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/layout.css') }}">
-
-    {% if title %}
-        <title>PrioTask - {{ title }}</title>
-    {% else %}
-        <title>PrioTask</title>
-    {% endif %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../static/styles/timer.css">
+    <script type="text/javascript" src="../static/scripts/timer.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&family=Madimi+One&display=swap" rel="stylesheet">
+  
+    <title>Priotask</title>
 </head>
 <body>
-  <header>
-    <a class="title" href="/">PrioTask</a>
-      <div class="collapse navbar-collapse" id="navbarToggle">
-        <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-        <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
-        <!-- Navbar Right Side -->
-        <div class="navbar-nav">
-          {% if current_user.is_authenticated %}
-            <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-            <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-          {% else %}
-            <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-            <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-          {% endif %}
-        </div>
-      </div>
+    <div class="dashboard">
+        <a class="left" href="{{ url_for('home') }}">Home</a>
+        <a class="left" href="{{ url_for('about') }}">About</a>
+        {% if current_user.is_authenticated %}
+        <a class="right" href="{{ url_for('account') }}">Account</a>
+        <a class="right" href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a class="right" href="{{ url_for('login') }}">Login</a>
+        <a class="right" href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </div>
   </header>
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-              {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
+              {% for message in messages %}
+                <div class="alert">
                   {{ message }}
                 </div>
               {% endfor %}
             {% endif %}
           {% endwith %}
-          {% block content %}{% endblock %}
         </div>
       </div>
     </main>
+    {% block content %}{% endblock %}
 
 
     <!-- Optional JavaScript -->
