@@ -277,3 +277,10 @@ legend {
   color: purple;
   font-size: 30px;
 }
+
+.rounded-circle {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
