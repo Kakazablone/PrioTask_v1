@@ -4,16 +4,16 @@
 import models
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
-from models.user import User
-
 
 
 class Task(BaseModel, Base):
     """Representation of a user """
     if models.storage_t == 'db':
         __tablename__ = 'tasks'
-        task_id = Column(String(60), ForeignKey('user.id'), nullable=False)
+        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         content = Column(String(1024), nullable=False)
-       
+
     else:
-       pass
+       task_id = ""
+       content = ""
+

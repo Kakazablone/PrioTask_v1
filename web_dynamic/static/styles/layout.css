@@ -1,0 +1,13 @@
+body {
+    background-color: lightcyan;
+}
+
+.collapse {
+    display: flex;
+    flex-flow: row, wrap;
+    justify-content: space-around;
+}
+
+a {
+    text-decoration: none;
+}
