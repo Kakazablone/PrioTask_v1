@@ -16,3 +16,4 @@ class Task(BaseModel, Base):
     else:
        task_id = ""
        content = ""
+
