@@ -92,11 +92,22 @@ function updateTimer() {
       // Timer has reached 0
       clearInterval(timerInterval);
       timerRunning = false;
+      resetTimer();
       return;
     }
   }
   updateDisplay();
 }
+function resetTimer() {
+    // Reset timer to initial value
+    if ($("#pomodoro").hasClass("selected")) {
+        selectTimer(25);
+    } else if ($("#shortbreak").hasClass("selected")) {
+        selectTimer(5);
+    } else if ($("#longbreak").hasClass("selected")) {
+        selectTimer(15);
+    }
+  }
 
 function updateDisplay() {
   // Update displayed minutes and seconds
