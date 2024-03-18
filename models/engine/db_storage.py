@@ -98,3 +98,17 @@ class DBStorage:
             count = len(models.storage.all(cls).values())
 
         return count
+
+    def get_user_tasks(self, user_id):
+        """
+        Retrieves tasks associated with a particular user.
+        Args:
+            user_id (str): The ID of the user.
+        Returns:
+            dict: A dictionary of tasks associated with the user, where keys are task IDs.
+        """
+        user_tasks_dict = {}
+        tasks = self.__session.query(Task).filter(Task.user_id == user_id).all()
+        for task in tasks:
+            user_tasks_dict[task.id] = task.to_dict()
+        return user_tasks_dict

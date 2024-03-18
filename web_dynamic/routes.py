@@ -8,7 +8,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt, check_password_hash
 from flask_login import LoginManager
 from PIL import Image
-from web_dynamic.forms import LoginForm, RegistrationForm, UpdateAccountForm
+from web_dynamic.forms import LoginForm, RegistrationForm, UpdateAccountForm, TaskForm
 import os
 import secrets
 import uuid
@@ -37,12 +37,21 @@ def load_user(user_id):
         return user
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
+@login_required
 def home():
     """The root endpoint, main section of the priotask
     web application
     """
-    return render_template('timer.html')
+    form = TaskForm()
+    task = None
+    if form.validate_on_submit():
+        task_name = form.task_name.data
+        task = Task(user_id=current_user.id, content=task_name)
+        storage.new(task)
+        storage.save() 
+    tasks = storage.get_user_tasks(current_user.id)
+    return render_template('timer.html', form=form, tasks=tasks)
 
 
 @app.route("/about")

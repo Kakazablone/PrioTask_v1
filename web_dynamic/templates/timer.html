@@ -23,7 +23,35 @@
                 <button id="pause">Pause</button>
                 <button id="stop">Stop</button>
             </div>
+            <div class="tasks">
+                <form method="post">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.task_name(class="task-name") }}
+                        {% for error in form.task_name.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        {{ form.submit(class="task-submit") }}
+                    </div>
+                </form>
+            </div>
         </div>
-       
+        <div class="task-list">
+            <h2>Tasks</h2>
+            {% if tasks %}
+            <ul>
+              {% for task_id, task_info in tasks.items() %}
+                <li>{{ task_info.content }}
+                    <a href="{{ url_for('edit_task', task_id=task_id) }}">Edit</a>
+                    <a href="{{ url_for('delete_task', task_id=task_id) }}">Delete</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>No tasks available.</p>
+          {% endif %}
+        </div>
     </section>
 {% endblock content %}

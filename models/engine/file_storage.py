@@ -97,3 +97,17 @@ class FileStorage:
             count = len(models.storage.all(cls).values())
 
         return count
+
+    def get_user_tasks(self, user_id):
+            """
+            Retrieves tasks associated with a particular user.
+            Args:
+                user_id (str): The ID of the user.
+            Returns:
+                list: A list of tasks associated with the user.
+            """
+            user_tasks_dict = {}
+            for obj in self.__objects.values():
+                if isinstance(obj, Task) and obj.user_id == user_id:
+                    user_tasks_dict[obj.id] = obj.to_dict()
+            return user_tasks_dict
