@@ -24,6 +24,7 @@ class User(BaseModel, UserMixin, Base):
         password = ""
         first_name = ""
         last_name = ""
+        image_file = "default.jpg"
 
 
 
