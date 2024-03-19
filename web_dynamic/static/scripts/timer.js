@@ -4,6 +4,7 @@ let secondsRemaining = 0;
 let timerRunning = false;
 
 $(document).ready(function () {
+
   selectTimer(25); // Select "Pomodoro" on page load
     $("#pomodoro").click(function () {
       setTimeout(() => {
@@ -34,6 +35,7 @@ $(document).ready(function () {
         $("body, html").css("background-color", "#5A666E");
       }, 50);
     });
+
     $("#start").click(function () {
       if (!timerRunning) {
         startTimer();
@@ -52,6 +54,16 @@ $(document).ready(function () {
       stopTimer();
       timerRunning = false;
     });
+
+    $("#toggle-tasks").click(function () {
+      var $this = $(this);
+      $("#task-list").fadeToggle("slow", function() {
+        $this.text(function (i, text) {
+          return text === "Show Tasks" ? "Hide Tasks" : "Show Tasks";
+        });
+      });
+    });
+
 });
 
 function startTimer() {
@@ -128,3 +140,4 @@ function formatTime(time) {
   // Add leading zero if time is less than 10
   return time < 10 ? "0" + time : time;
 }
+

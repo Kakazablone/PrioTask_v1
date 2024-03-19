@@ -74,6 +74,7 @@ h1 {
 
 section {
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -81,8 +82,9 @@ section {
 }
 
 .container {
-  width: 70%;
+  width: 60%;
   margin: 0;
+  margin-bottom: 30px;
   padding-inline: 2rem;
   display: flex;
   justify-content: center;
@@ -305,9 +307,11 @@ legend {
 }
 
 .task-list {
-  margin-top: 20px;
+  display: block;
+  background-color: rgba(211, 211, 211, 0.349);
+  border-radius: 25px 0 25px 0; 
   padding: 40px;
-  width: 20vw;
+  width: 400px;
 }
 
 .task-list ul {
@@ -316,7 +320,9 @@ legend {
 }
 
 .task-list ul li {
-  margin-bottom: 5px;
+  font-size: 24px;
+  width: 100%;
+  margin: 0;
   color: white;
 }
 
@@ -325,7 +331,13 @@ legend {
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+}
 
+#toggle-tasks {
+  font-family: Khand;
+  padding: 3px 15px;
+  margin: 0px;
+  font-size: 16px;
 }
 
 .task-name {
@@ -353,8 +365,15 @@ legend {
 .task-submit:hover {
   background-color: #0056b3;
 }
-section {
+
+.task-list .btn {
+  padding: 3px 12px;
+  font-family: Khand;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px;
+}
+
+.task-list .button-group {
   display: flex;
-  flex-flow: row wrap;
-  margin-bottom: 20px;
 }

@@ -170,3 +170,22 @@ def account():
                          filename='images/' + current_user.image_file)
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
+
+@app.route('/edit_task/<task_id>', methods=['GET', 'POST'])
+@login_required
+def edit_task(task_id):
+    pass
+
+@app.route('/delete_task/<task_id>', methods=['DELETE'])
+@login_required
+def delete_task(task_id):
+        task = storage.get(Task, task_id)
+        if not task or task.user_id != current_user.id:
+            flash('Task not found or unauthorized', 'error')
+            return redirect(url_for('home'))
+
+        storage.delete(task)
+        storage.save()
+        flash('Task deleted successfully')
+        return redirect(url_for('home'))
+
