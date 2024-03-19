@@ -22,7 +22,26 @@
         <a class="left" href="{{ url_for('about') }}">About</a>
         {% if current_user.is_authenticated %}
         <a class="right" href="{{ url_for('account') }}">Account</a>
-        <a class="right" href="{{ url_for('logout') }}">Logout</a>
+        <div class="dropdown right">
+          <button class="dropdown-btn">Customize <span class="arrow"></span></button>          
+          <div class="dropdown-content">
+            <div class="check">
+              <label for=""><input type="radio" name="time-option" checked value="Default"> Default <span class="default">25min . 5min . 15min</span></label>
+            </div>
+            <div class="check">
+              <label for=""><input type="radio" name="time-option" value="Confident"> Confident <span class="default">60min . 10min . 30min</span></label>
+            </div> 
+            <div class="check">
+              <label for=""><input type="radio" name="time-option" value="Custom"> Custom <span class="default">
+                <label for="">Pomodoro<input type="number" class="range-input" id="customInput" min="10" max="60" step="1" value="25" id="pomodoroInput"></label>
+                <label for="">Short Break<input type="number" class="range-input" id="customInput" min="5" max="60" step="1" value="5" id="shortBreakInput"></label>
+                <label for="">Long Break<input type="number" class="range-input" id="customInput" min="5" max="60" step="1" value="15" id="longBreakInput"></label>
+                <label for=""><input type="button" value="Save" id="saveCustom"></label>
+            </label>
+            </div>         
+          </div>
+        </div>
+        <a class="right" href="{{ url_for('logout') }}">Logout</a>        
         {% else %}
         <a class="right" href="{{ url_for('login') }}">Login</a>
         <a class="right" href="{{ url_for('register') }}">Register</a>
@@ -43,8 +62,9 @@
           {% endwith %}
         </div>
       </div>
-    </main>
+    </main>   
     {% block content %}{% endblock %}
+
 
 
     <!-- Optional JavaScript -->

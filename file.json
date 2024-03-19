@@ -1,0 +1,36 @@
+{
+    "User.c9a6bff7-2384-4269-9535-45a9c8e3f23d": {
+        "username": "met",
+        "first_name": "Metrine",
+        "last_name": "Makana",
+        "email": "metrinenam@gmail.com",
+        "password": "$2b$12$zTTcspNWRC7SDq7Jcdkgd.NV5N3xK66xhIGwDMglr6qUu2sYGqhaK",
+        "created_at": "2024-03-18T07:18:44.319297",
+        "updated_at": "2024-03-18T07:18:44.319304",
+        "id": "c9a6bff7-2384-4269-9535-45a9c8e3f23d",
+        "image_file": "6cdc3bd58c6c8a8a.jpg",
+        "__class__": "User"
+    },
+    "Custom.0e353ca7-3a72-4bd6-8a23-d1bcbef30b65": {
+        "id": "0e353ca7-3a72-4bd6-8a23-d1bcbef30b65",
+        "created_at": "2024-03-18T16:44:57.157755",
+        "updated_at": "2024-03-18T16:44:57.157824",
+        "__class__": "Custom"
+    },
+    "Custom.5d64cb12-9a55-4df3-a535-b3524804328e": {
+        "user_id": "c9a6bff7-2384-4269-9535-45a9c8e3f23d",
+        "pomodoro_value": 30,
+        "short_value": 5,
+        "": 17,
+        "created_at": "2024-03-18T16:49:27.025482",
+        "updated_at": "2024-03-18T16:49:27.025549",
+        "id": "5d64cb12-9a55-4df3-a535-b3524804328e",
+        "__class__": "Custom"
+    },
+    "Custom.6b5cc9b0-a229-4a0c-8232-7fedb6af570f": {
+        "id": "6b5cc9b0-a229-4a0c-8232-7fedb6af570f",
+        "created_at": "2024-03-19T06:34:25.252011",
+        "updated_at": "2024-03-19T06:34:25.252050",
+        "__class__": "Custom"
+    }
+}

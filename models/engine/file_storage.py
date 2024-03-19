@@ -8,9 +8,10 @@ import models
 from models.base_model import BaseModel
 from models.task import Task
 from models.user import User
+from models.custom import Custom
 from hashlib import md5
 
-classes = {"BaseModel": BaseModel, "User": User, "Task": Task}
+classes = {"BaseModel": BaseModel, "User": User, "Task": Task, "Custom": Custom}
 
 
 class FileStorage:

@@ -161,3 +161,39 @@ def account():
                          filename='images/' + current_user.image_file)
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
+
+
+@app.route('/save_custom_timer', methods=['POST', 'GET'])
+def save_custom_timer():
+    # Parse request data
+    data = request.json
+    user_id = data.get('user_id')
+    name = data.get('name')
+    pomodoro_value = data.get('pomodoro_value')
+    short_value = data.get('short_value')
+    long_value = data.get('long_value')
+
+    # Check if user already has a custom entry
+    custom_entry = storage.get_custom_by_user_id(user_id)
+
+    if custom_entry:
+        # Update existing entry
+        custom_entry.name = name
+        custom_entry.pomodoro_value = pomodoro_value
+        custom_entry.short_value = short_value
+        custom_entry.long_value = long_value
+    else:
+        # Create new entry
+        custom_entry = Custom(
+            user_id=user_id,
+            name=name,
+            pomodoro_value=pomodoro_value,
+            short_value=short_value,
+            long_value=long_value
+        )
+
+    # Save changes to the database
+    storage.save()
+
+    return jsonify({'message': 'Custom timer values saved successfully'})
+
