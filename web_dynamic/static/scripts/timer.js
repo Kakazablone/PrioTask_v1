@@ -7,6 +7,7 @@ let longBreakTime = 0;
 let timerRunning = false;
 
 $(document).ready(function () {
+
   selectTimer(25); // Select "Pomodoro" on page load
   $("#pomodoro").click(function () {
     setTimeout(() => {
@@ -18,6 +19,7 @@ $(document).ready(function () {
     }, 50);
   });
 
+
   $("#shortbreak").click(function () {
     setTimeout(() => {
       stopTimer(); // Stop the timer before switching
@@ -27,6 +29,24 @@ $(document).ready(function () {
       $("body, html").css("background-color", "#987C7D");
     }, 50);
   });
+
+    $("#longbreak").click(function () {
+      setTimeout(() => {
+        stopTimer(); // Stop the timer before switching
+        selectTimer(15);
+        $(this).addClass("selected");
+        $("#pomodoro, #shortbreak").removeClass("selected");
+        $("body, html").css("background-color", "#5A666E");
+      }, 50);
+    });
+
+    $("#start").click(function () {
+      if (!timerRunning) {
+        startTimer();
+        timerRunning = true;
+      }
+    });
+
 
   $("#longbreak").click(function () {
     setTimeout(() => {

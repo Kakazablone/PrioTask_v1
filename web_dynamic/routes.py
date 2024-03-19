@@ -8,7 +8,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt, check_password_hash
 from flask_login import LoginManager
 from PIL import Image
-from web_dynamic.forms import LoginForm, RegistrationForm, UpdateAccountForm
+from web_dynamic.forms import LoginForm, RegistrationForm, UpdateAccountForm, TaskForm
 import os
 import secrets
 import uuid
@@ -37,12 +37,21 @@ def load_user(user_id):
         return user
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
+@login_required
 def home():
     """The root endpoint, main section of the priotask
     web application
     """
-    return render_template('timer.html')
+    form = TaskForm()
+    task = None
+    if form.validate_on_submit():
+        task_name = form.task_name.data
+        task = Task(user_id=current_user.id, content=task_name)
+        storage.new(task)
+        storage.save() 
+    tasks = storage.get_user_tasks(current_user.id)
+    return render_template('timer.html', form=form, tasks=tasks)
 
 
 @app.route("/about")
@@ -162,6 +171,7 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
+<<<<<<< HEAD
 
 @app.route('/save_custom_timer', methods=['POST', 'GET'])
 def save_custom_timer():
@@ -196,4 +206,23 @@ def save_custom_timer():
     storage.save()
 
     return jsonify({'message': 'Custom timer values saved successfully'})
+=======
+@app.route('/edit_task/<task_id>', methods=['GET', 'POST'])
+@login_required
+def edit_task(task_id):
+    pass
+
+@app.route('/delete_task/<task_id>', methods=['DELETE'])
+@login_required
+def delete_task(task_id):
+        task = storage.get(Task, task_id)
+        if not task or task.user_id != current_user.id:
+            flash('Task not found or unauthorized', 'error')
+            return redirect(url_for('home'))
+
+        storage.delete(task)
+        storage.save()
+        flash('Task deleted successfully')
+        return redirect(url_for('home'))
+>>>>>>> master
 

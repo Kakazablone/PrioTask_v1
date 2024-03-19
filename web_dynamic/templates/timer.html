@@ -19,11 +19,44 @@
                 </div>
             </div>
             <div class="controls">
-                <button id="start" >Start</button>
+                <button id="start">Start</button>
                 <button id="pause">Pause</button>
                 <button id="stop">Stop</button>
             </div>
+            <div class="tasks">
+                <form method="post">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.task_name(class="task-name") }}
+                        {% for error in form.task_name.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        {{ form.submit(class="task-submit") }}
+                        <button class="task-submit" type="button" id="toggle-tasks">Show Tasks</button>
+                    </div>
+                </form>
+            </div>
         </div>
-       
+        <div class="task-list" id="task-list" style="display: none;">
+            <h2>Tasks</h2>
+            {% if tasks %}
+            <ul>
+              {% for task_id, task_info in tasks.items() %}
+                <li>{{ task_info.content }}
+                    <div class="button-group">
+                        <button class="btn edit-button" data-task-id="{{ task_id }}">Edit</button>
+                        <form action="{{ url_for('delete_task', task_id=task_id) }}" method="DELETE">
+                            <button class="btn" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>No tasks available.</p>
+          {% endif %}
+        </div>
     </section>
 {% endblock content %}
