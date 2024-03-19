@@ -74,13 +74,17 @@ h1 {
 
 section {
   display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   align-items: center;
+  margin: 0;
   height: 100%;
 }
 
 .container {
-  width: min(42.5rem, 100%);
-  margin-inline: auto;
+  width: 60%;
+  margin: 0;
+  margin-bottom: 30px;
   padding-inline: 2rem;
   display: flex;
   justify-content: center;
@@ -268,6 +272,10 @@ fieldset {
   color: white;
 }
 
+.alert-container {
+  text-align: center;
+}
+
 .alert {
   color: white;
   margin-top: 30px;
@@ -283,4 +291,89 @@ legend {
   width: 100px;
   height: 100px;
   object-fit: cover;
+}
+
+.task-form {
+  margin-top: 20px;
+}
+
+.task-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-form form div {
+  margin-bottom: 10px;
+}
+
+.task-list {
+  display: block;
+  background-color: rgba(211, 211, 211, 0.349);
+  border-radius: 25px 0 25px 0; 
+  padding: 40px;
+  width: 400px;
+}
+
+.task-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-list ul li {
+  font-size: 24px;
+  width: 100%;
+  margin: 0;
+  color: white;
+}
+
+.tasks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#toggle-tasks {
+  font-family: Khand;
+  padding: 3px 15px;
+  margin: 0px;
+  font-size: 16px;
+}
+
+.task-name {
+  width: auto;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: border-color 0.3s ease;
+}
+
+.task-name:focus {
+  border-color: #007bff;
+}
+
+.task-submit {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-submit:hover {
+  background-color: #0056b3;
+}
+
+.task-list .btn {
+  padding: 3px 12px;
+  font-family: Khand;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px;
+}
+
+.task-list .button-group {
+  display: flex;
 }
