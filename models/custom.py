@@ -10,7 +10,7 @@ class Custom(BaseModel, Base):
     """Representation of a user """
     if models.storage_t == 'db':
         __tablename__ = 'customes'
-        # user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(60), nullable=False)
         pomodoro_value = Column(Integer, nullable=False)
         short_value = Column(Integer, nullable=False)
@@ -18,7 +18,7 @@ class Custom(BaseModel, Base):
 
 
     else:
-       # user_id = ""
+       user_id = ""
        name = ""
        pomodoro_value = ""
        short_value = ""

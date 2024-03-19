@@ -3,6 +3,7 @@
 from models import storage
 from models.task import Task
 from models.user import User
+from models.custom import Custom
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt, check_password_hash
@@ -171,58 +172,26 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
-<<<<<<< HEAD
 
-@app.route('/save_custom_timer', methods=['POST', 'GET'])
-def save_custom_timer():
+@app.route('/custom_timer', methods=['POST', 'GET'])
+@login_required
+def custom_timer():
     # Parse request data
-    data = request.json
-    user_id = data.get('user_id')
-    name = data.get('name')
-    pomodoro_value = data.get('pomodoro_value')
-    short_value = data.get('short_value')
-    long_value = data.get('long_value')
+    form = request.form
+    # user_id = current_user.id
+    name = request.form['name']
+    pomodoro_value = request.form['pomodoro_value']
+    short_value = request.form['short_value']
+    long_value = request.form['long_value']
 
     # Check if user already has a custom entry
-    custom_entry = storage.get_custom_by_user_id(user_id)
+    custom_entry = Custom(current_user.id, name=name, pomodoro_value=pomodoro_value, short_value=short_value, long_value=long_value)
 
     if custom_entry:
-        # Update existing entry
-        custom_entry.name = name
-        custom_entry.pomodoro_value = pomodoro_value
-        custom_entry.short_value = short_value
-        custom_entry.long_value = long_value
-    else:
-        # Create new entry
-        custom_entry = Custom(
-            user_id=user_id,
-            name=name,
-            pomodoro_value=pomodoro_value,
-            short_value=short_value,
-            long_value=long_value
-        )
-
-    # Save changes to the database
-    storage.save()
-
-    return jsonify({'message': 'Custom timer values saved successfully'})
-=======
-@app.route('/edit_task/<task_id>', methods=['GET', 'POST'])
-@login_required
-def edit_task(task_id):
-    pass
-
-@app.route('/delete_task/<task_id>', methods=['DELETE'])
-@login_required
-def delete_task(task_id):
-        task = storage.get(Task, task_id)
-        if not task or task.user_id != current_user.id:
-            flash('Task not found or unauthorized', 'error')
-            return redirect(url_for('home'))
-
-        storage.delete(task)
+        storage.new(custom_entry)
         storage.save()
-        flash('Task deleted successfully')
-        return redirect(url_for('home'))
->>>>>>> master
+    else:
+        print("Field not updated")
 
+
+    return render_template('layout.html', form=form)

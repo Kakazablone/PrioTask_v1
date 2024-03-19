@@ -78,42 +78,44 @@ $(document).ready(function () {
   $(".dropdown-btn").click(function () {
     $(this).next(".dropdown-content").toggle();
   });
-  
-  $("#saveCustom").click(function () {
-    let name = prompt("Enter a custom name:  ");
-    let user_id = "{{ current_user.id }}";
+  function fetchCustomTimers() {
+    $.get("/get_custom_timers", function (customTimers) {
+      // Clear existing custom timers
+      $("#customTimersContainer").empty();
 
-    if (name === null || name.trim() === "") {
-      alert("You must enter a name for your custom timer settings.");
-      return;
-    }
+      // Append each custom timer as a radio button
+      customTimers.forEach(function (timer) {
+        let radioHtml =
+          '<div class="check"><label><input type="radio" name="time-option" value="' +
+          timer.name +
+          '"> ' +
+          timer.name +
+          ' <span class="default">' +
+          timer.pomodoro_value +
+          "min . " +
+          timer.short_value +
+          "min . " +
+          timer.long_value +
+          "min</span></label></div>";
+        $("#customTimersContainer").append(radioHtml);
+      });
+    });
+  }
 
-    // Get custom timer values
-    let pomodoroValue = $("#pomodoroInput").val();
-    let shortBreakValue = $("#shortBreakInput").val();
-    let longBreakValue = $("#longBreakInput").val();
+  // Fetch and display custom timers when the page loads
+  fetchCustomTimers();
 
-    // Create JSON object with the data
-    let data = {
-      user_id: user_id,
-      name: name,
-      pomodoro_value: pomodoroValue,
-      short_value: shortBreakValue,
-      long_value: longBreakValue,
-    };
-
-    // Send POST request to Flask endpoint
-    $.post("/save_custom_timer", JSON.stringify(data), function (response) {
-      // Handle success response
-      console.log(response);
-      alert("Custom timer values saved successfully");
-    }).fail(function (error) {
-      // Handle error response
-      console.error("Error saving custom timer values:", error);
-      alert("Error saving custom timer values. Please try again later.");
+  // Event listener for custom timer form submission
+  $("#saveCustom").click(function (event) {
+    event.preventDefault();
+    let formData = $("#customTimerForm").serialize();
+    $.post("/custom_timer", formData, function (response) {
+      console.log("Data saved successfully:", response);
+      // After saving, fetch and display updated custom timers
+      fetchCustomTimers();
     });
   });
- 
+
 });
 
 function startTimer() {
