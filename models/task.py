@@ -14,5 +14,5 @@ class Task(BaseModel, Base):
         content = Column(String(1024), nullable=False)
 
     else:
-       user_id = ""
-       content = ""
+        user_id = ""
+        content = ""

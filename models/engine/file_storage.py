@@ -8,9 +8,11 @@ import models
 from models.base_model import BaseModel
 from models.task import Task
 from models.user import User
+from models.custom import Custom
 from hashlib import md5
 
-classes = {"BaseModel": BaseModel, "User": User, "Task": Task}
+classes = {"BaseModel": BaseModel, "User": User, "Task": Task,
+           "Custom": Custom}
 
 
 class FileStorage:
@@ -54,8 +56,8 @@ class FileStorage:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
-            pass
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            print(f"Error occurred: {e}")
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
@@ -98,16 +100,13 @@ class FileStorage:
 
         return count
 
-    def get_user_tasks(self, user_id):
-            """
-            Retrieves tasks associated with a particular user.
-            Args:
-                user_id (str): The ID of the user.
-            Returns:
-                list: A list of tasks associated with the user.
-            """
-            user_tasks_dict = {}
-            for obj in self.__objects.values():
-                if isinstance(obj, Task) and obj.user_id == user_id:
-                    user_tasks_dict[obj.id] = obj.to_dict()
-            return user_tasks_dict
+    def get_user_objects(self, user_id, obj_type):
+        """
+        Retrieves a list of objects of a specified type
+        associated with the user.
+        """
+        user_obj_dict = {}
+        for obj in self.__objects.values():
+            if isinstance(obj, obj_type) and obj.user_id == user_id:
+                user_obj_dict[obj.id] = obj.to_dict()
+        return user_obj_dict
