@@ -12,7 +12,8 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = {"User": User, "Task": Task, "BaseModel": BaseModel}
+classes = {"User": User, "Task": Task,
+           "BaseModel": BaseModel, "Custom": Custom}
 
 
 class DBStorage:
@@ -100,16 +101,15 @@ class DBStorage:
 
         return count
 
-    def get_user_tasks(self, user_id):
+    def get_user_objects(self, user_id, obj_type):
         """
-        Retrieves tasks associated with a particular user.
-        Args:
-            user_id (str): The ID of the user.
-        Returns:
-            dict: A dictionary of tasks associated with the user, where keys are task IDs.
+        Retrieves a dictionary of objects of a specified
+        type associated with the user,
+        where keys are object IDs.
         """
-        user_tasks_dict = {}
-        tasks = self.__session.query(Task).filter(Task.user_id == user_id).all()
-        for task in tasks:
-            user_tasks_dict[task.id] = task.to_dict()
-        return user_tasks_dict
+        user_obj_dict = {}
+        objects = self.__session.query(obj_type).\
+            filter(obj_type.user_id == user_id).all()
+        for obj in objects:
+            user_obj_dict[obj.id] = obj.to_dict()
+        return user_obj_dict
