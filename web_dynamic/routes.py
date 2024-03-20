@@ -8,7 +8,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt, check_password_hash
 from flask_login import LoginManager
 from PIL import Image
-from web_dynamic.forms import LoginForm, RegistrationForm, UpdateAccountForm, TaskForm
+from web_dynamic.forms import LoginForm, RegistrationForm
+from web_dynamic.forms import UpdateAccountForm, TaskForm
 import os
 import secrets
 import uuid
@@ -49,7 +50,7 @@ def home():
         task_name = form.task_name.data
         task = Task(user_id=current_user.id, content=task_name)
         storage.new(task)
-        storage.save() 
+        storage.save()
     tasks = storage.get_user_tasks(current_user.id)
     return render_template('timer.html', form=form, tasks=tasks)
 
@@ -171,21 +172,22 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
+
 @app.route('/edit_task/<task_id>', methods=['GET', 'POST'])
 @login_required
 def edit_task(task_id):
     pass
 
+
 @app.route('/delete_task/<task_id>', methods=['DELETE'])
 @login_required
 def delete_task(task_id):
-        task = storage.get(Task, task_id)
-        if not task or task.user_id != current_user.id:
-            flash('Task not found or unauthorized', 'error')
-            return redirect(url_for('home'))
-
-        storage.delete(task)
-        storage.save()
-        flash('Task deleted successfully')
+    task = storage.get(Task, task_id)
+    if not task or task.user_id != current_user.id:
+        flash('Task not found or unauthorized', 'error')
         return redirect(url_for('home'))
 
+    storage.delete(task)
+    storage.save()
+    flash('Task deleted successfully')
+    return redirect(url_for('home'))

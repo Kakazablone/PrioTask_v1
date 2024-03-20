@@ -64,6 +64,12 @@ def post_user():
         abort(400, description="Missing email")
     if 'password' not in request.get_json():
         abort(400, description="Missing password")
+    if 'username' not in request.get_json():
+        abort(400, description="Missing username")
+    if 'first_name' not in request.get_json():
+        abort(400, description="Missing first_name")
+    if 'last_name' not in request.get_json():
+        abort(400, description="Missing last_name")
 
     data = request.get_json()
     instance = User(**data)
@@ -85,7 +91,7 @@ def put_user(user_id):
     if not request.get_json():
         abort(400, description="Not a JSON")
 
-    ignore = ['id', 'email', 'created_at', 'updated_at']
+    ignore = ['id', 'first_name', 'last_name', 'created_at', 'updated_at']
 
     data = request.get_json()
     for key, value in data.items():
