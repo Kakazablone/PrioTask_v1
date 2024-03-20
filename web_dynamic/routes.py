@@ -4,7 +4,7 @@ from models import storage
 from models.task import Task
 from models.user import User
 from models.custom import Custom
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt, check_password_hash
 from flask_login import LoginManager
@@ -194,4 +194,9 @@ def custom_timer():
         print("Field not updated")
 
 
-    return render_template('layout.html', form=form)
+    return jsonify({'timer': {
+        'name': custom_entry.name,
+        'pomodoro_value': custom_entry.pomodoro_value,
+        'short_value': custom_entry.short_value,
+        'long_value': custom_entry.long_value
+    }})

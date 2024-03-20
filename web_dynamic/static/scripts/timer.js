@@ -1,18 +1,19 @@
 let timerInterval;
 let minutesRemaining = 25; // Initial value for countdown timer (25 minutes)
 let secondsRemaining = 0;
-let pomodoroTime = 0;
-let shortBreakTime = 0;
-let longBreakTime = 0;
+let pomodoroTime = 25;
+let shortBreakTime = 5;
+let longBreakTime = 15;
 let timerRunning = false;
 
 $(document).ready(function () {
+  loadCustomTimers();
 
   selectTimer(25); // Select "Pomodoro" on page load
   $("#pomodoro").click(function () {
     setTimeout(() => {
       stopTimer(); // Stop the timer before switching
-      selectTimer(25);
+      selectTimer(pomodoroTime);
       $(this).addClass("selected");
       $("#shortbreak, #longbreak").removeClass("selected");
       $("body, html").css("background-color", "");
@@ -23,7 +24,7 @@ $(document).ready(function () {
   $("#shortbreak").click(function () {
     setTimeout(() => {
       stopTimer(); // Stop the timer before switching
-      selectTimer(5);
+      selectTimer(shortBreakTime);
       $(this).addClass("selected");
       $("#pomodoro, #longbreak").removeClass("selected");
       $("body, html").css("background-color", "#987C7D");
@@ -33,7 +34,7 @@ $(document).ready(function () {
     $("#longbreak").click(function () {
       setTimeout(() => {
         stopTimer(); // Stop the timer before switching
-        selectTimer(15);
+        selectTimer(longBreakTime);
         $(this).addClass("selected");
         $("#pomodoro, #shortbreak").removeClass("selected");
         $("body, html").css("background-color", "#5A666E");
@@ -48,21 +49,7 @@ $(document).ready(function () {
     });
 
 
-  $("#longbreak").click(function () {
-    setTimeout(() => {
-      stopTimer(); // Stop the timer before switching
-      selectTimer(15);
-      $(this).addClass("selected");
-      $("#pomodoro, #shortbreak").removeClass("selected");
-      $("body, html").css("background-color", "#5A666E");
-    }, 50);
-  });
-  $("#start").click(function () {
-    if (!timerRunning) {
-      startTimer();
-      timerRunning = true;
-    }
-  });
+
 
   $("#pause").click(function () {
     if (timerRunning) {
@@ -78,45 +65,107 @@ $(document).ready(function () {
   $(".dropdown-btn").click(function () {
     $(this).next(".dropdown-content").toggle();
   });
-  function fetchCustomTimers() {
-    $.get("/get_custom_timers", function (customTimers) {
-      // Clear existing custom timers
-      $("#customTimersContainer").empty();
-
-      // Append each custom timer as a radio button
-      customTimers.forEach(function (timer) {
-        let radioHtml =
-          '<div class="check"><label><input type="radio" name="time-option" value="' +
-          timer.name +
-          '"> ' +
-          timer.name +
-          ' <span class="default">' +
-          timer.pomodoro_value +
-          "min . " +
-          timer.short_value +
-          "min . " +
-          timer.long_value +
-          "min</span></label></div>";
-        $("#customTimersContainer").append(radioHtml);
-      });
-    });
-  }
-
-  // Fetch and display custom timers when the page loads
-  fetchCustomTimers();
+  
 
   // Event listener for custom timer form submission
   $("#saveCustom").click(function (event) {
-    event.preventDefault();
-    let formData = $("#customTimerForm").serialize();
-    $.post("/custom_timer", formData, function (response) {
-      console.log("Data saved successfully:", response);
-      // After saving, fetch and display updated custom timers
-      fetchCustomTimers();
-    });
+  event.preventDefault();
+  
+  let formData = $("#customTimerForm").serialize();
+  
+  $.post("/custom_timer", formData, function (response) {
+    console.log("Data saved successfully:", response);      
+    
+    // Dynamically add a radio button to the dropdown
+    let timer = response.timer;
+    let radioHtml =
+      '<div class="check"><label><input type="radio" name="time-option" data-pomodoro="' +
+      timer.pomodoro_value +
+      '" data-short="' +
+      timer.short_value +
+      '" data-long="' +
+      timer.long_value +
+      '" value="' +
+      timer.name +
+      '"> ' +
+      timer.name +
+      ' <span class="default">' +
+      timer.pomodoro_value +
+      "min . " +
+      timer.short_value +
+      "min . " +
+      timer.long_value +
+      "min</span></label></div>";
+                   
+    $("#customTimersContainer").append(radioHtml);
+    saveCustomTimers();
   });
+});
+$(document).on(
+  "click",
+  '#customTimersContainer input[type="radio"]',
+  function () {
+    let pomodoro = parseInt($(this).data("pomodoro"));
+    let short = parseInt($(this).data("short"));
+    let long = parseInt($(this).data("long"));
+
+    pomodoroTime = pomodoro;
+    shortBreakTime = short;
+    longBreakTime = long;
+
+    // Check which timer option is currently selected
+    if ($("#pomodoro").hasClass("selected")) {
+      selectTimer(pomodoro);
+    } else if ($("#shortbreak").hasClass("selected")) {
+      selectTimer(short);
+    } else if ($("#longbreak").hasClass("selected")) {
+      selectTimer(long);
+    }
+  }
+);
+function loadCustomTimers() {
+  let customTimers = JSON.parse(localStorage.getItem("customTimers")) || [];
+  customTimers.forEach(function (timer) {
+    let radioHtml =
+      '<div class="check"><label><input type="radio" name="time-option" data-pomodoro="' +
+      timer.pomodoro_value +
+      '" data-short="' +
+      timer.short_value +
+      '" data-long="' +
+      timer.long_value +
+      '" value="' +
+      timer.name +
+      '"> ' +
+      timer.name +
+      ' <span class="default">' +
+      timer.pomodoro_value +
+      "min . " +
+      timer.short_value +
+      "min . " +
+      timer.long_value +
+      "min</span></label></div>";
+    $("#customTimersContainer").append(radioHtml);
+  });
+}
+
+// Function to save custom timers to local storage
+function saveCustomTimers() {
+  let customTimers = [];
+  $("#customTimersContainer input[type='radio']").each(function () {
+    let timer = {
+      name: $(this).val(),
+      pomodoro_value: $(this).data("pomodoro"),
+      short_value: $(this).data("short"),
+      long_value: $(this).data("long"),
+    };
+    customTimers.push(timer);
+  });
+  localStorage.setItem("customTimers", JSON.stringify(customTimers));
+}
 
 });
+
+
 
 function startTimer() {
   // Start the timer
@@ -160,7 +209,7 @@ function updateTimer() {
       return;
     }
   }
-  updateDisplay();
+  updateDisplay(minutesRemaining, secondsRemaining);
 }
 function resetTimer() {
     // Reset timer to initial value
@@ -192,4 +241,5 @@ function formatTime(time) {
   // Add leading zero if time is less than 10
   return time < 10 ? "0" + time : time;
 }
+
 

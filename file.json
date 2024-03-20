@@ -445,5 +445,85 @@
         "updated_at": "2024-03-19T11:13:41.791354",
         "id": "0e8ea99e-c8cc-4c99-b232-d93c1e6c30e9",
         "__class__": "Custom"
+    },
+    "Custom.76a0b2c1-86ab-4fdb-a21f-81ff1574b278": {
+        "name": "day",
+        "pomodoro_value": "27",
+        "short_value": "7",
+        "long_value": "17",
+        "created_at": "2024-03-20T04:43:38.962501",
+        "updated_at": "2024-03-20T04:43:38.962504",
+        "id": "76a0b2c1-86ab-4fdb-a21f-81ff1574b278",
+        "__class__": "Custom"
+    },
+    "Custom.f8bee4b5-da26-4c61-a3aa-20ed0ec4a0e3": {
+        "name": "met",
+        "pomodoro_value": "25",
+        "short_value": "5",
+        "long_value": "15",
+        "created_at": "2024-03-20T04:54:47.937481",
+        "updated_at": "2024-03-20T04:54:47.937483",
+        "id": "f8bee4b5-da26-4c61-a3aa-20ed0ec4a0e3",
+        "__class__": "Custom"
+    },
+    "Custom.9c450036-17a5-46c1-a5fd-576357cc9843": {
+        "name": "met",
+        "pomodoro_value": "27",
+        "short_value": "7",
+        "long_value": "18",
+        "created_at": "2024-03-20T05:21:07.235432",
+        "updated_at": "2024-03-20T05:21:07.235438",
+        "id": "9c450036-17a5-46c1-a5fd-576357cc9843",
+        "__class__": "Custom"
+    },
+    "Custom.a265a0d0-b026-4069-88ff-4cef9ef41b84": {
+        "name": "met",
+        "pomodoro_value": "28",
+        "short_value": "8",
+        "long_value": "17",
+        "created_at": "2024-03-20T05:36:11.453667",
+        "updated_at": "2024-03-20T05:36:11.453670",
+        "id": "a265a0d0-b026-4069-88ff-4cef9ef41b84",
+        "__class__": "Custom"
+    },
+    "Custom.1f321060-cd12-4938-a5fe-fd187b0bb76a": {
+        "name": "met",
+        "pomodoro_value": "27",
+        "short_value": "7",
+        "long_value": "17",
+        "created_at": "2024-03-20T05:44:22.477233",
+        "updated_at": "2024-03-20T05:44:22.477236",
+        "id": "1f321060-cd12-4938-a5fe-fd187b0bb76a",
+        "__class__": "Custom"
+    },
+    "Custom.503fb4b0-93af-48ac-9653-8349e47a5c7e": {
+        "name": "met",
+        "pomodoro_value": "27",
+        "short_value": "6",
+        "long_value": "16",
+        "created_at": "2024-03-20T06:16:39.923978",
+        "updated_at": "2024-03-20T06:16:39.923980",
+        "id": "503fb4b0-93af-48ac-9653-8349e47a5c7e",
+        "__class__": "Custom"
+    },
+    "Custom.eab01a29-e7d3-4a7d-9716-5e49707ed3b1": {
+        "name": "example",
+        "pomodoro_value": "25",
+        "short_value": "5",
+        "long_value": "15",
+        "created_at": "2024-03-20T06:19:50.695590",
+        "updated_at": "2024-03-20T06:19:50.695596",
+        "id": "eab01a29-e7d3-4a7d-9716-5e49707ed3b1",
+        "__class__": "Custom"
+    },
+    "Custom.4a8c91f2-98bd-4111-89f3-39590fc2589b": {
+        "name": "time",
+        "pomodoro_value": "28",
+        "short_value": "8",
+        "long_value": "18",
+        "created_at": "2024-03-20T07:05:54.708300",
+        "updated_at": "2024-03-20T07:05:54.708307",
+        "id": "4a8c91f2-98bd-4111-89f3-39590fc2589b",
+        "__class__": "Custom"
     }
 }

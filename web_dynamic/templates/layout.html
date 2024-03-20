@@ -26,19 +26,14 @@
         <div class="dropdown right">
           <button class="dropdown-btn">Customize <span class="arrow"></span></button>          
           <form class="dropdown-content" id="customTimerForm">
-            <div class="check">
-              <label for=""><input type="radio" name="time-option" checked value="Default"> Default <span class="default">25min . 5min . 15min</span></label>
-            </div>
-            <div class="check">
-              <label for=""><input type="radio" name="time-option" value="Confident"> Confident <span class="default">60min . 10min . 30min</span></label>
-            </div> 
+            
             <div class="check" id="customTimersContainer">
             <!-- Custom timers will be appended here dynamically -->
         </div>
             <div class="check">
-              <label for=""><input type="radio" name="time-option" value="Custom"> Custom <span class="default">
-                <label for="user_id">{{ current_user.id }}</label>
-                <label for="name">Name: <input type="text" id="name" name="name"></label>
+              <label for=""><input type="radio" name="time-option" value="Custom" checked> Custom <span class="default">
+                <label for="user_id" id="user" style="display: none;">{{ current_user.id }}</label>
+                <label for="name">Name: <br><input type="text" id="name" name="name"></label><br>
                 <label for="pomodoro_value">Pomodoro<input type="number" class="range-input" id="pomodoro_value" min="10" max="60" step="1" value="25" name="pomodoro_value""></label>
                 <label for="short_value">Short Break<input type="number" class="range-input" id="short_value" min="5" max="60" step="1" value="5" name="short_value"></label>
                 <label for="long_value">Long Break<input type="number" class="range-input" id="long_value" min="5" max="60" step="1" value="15" name="long_value"></label>
