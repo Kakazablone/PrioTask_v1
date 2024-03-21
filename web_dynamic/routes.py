@@ -3,7 +3,7 @@
 from models import storage
 from models.task import Task
 from models.user import User
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt, check_password_hash
 from flask_login import LoginManager
@@ -44,15 +44,9 @@ def home():
     """The root endpoint, main section of the priotask
     web application
     """
+    user_id = current_user.id
     form = TaskForm()
-    task = None
-    if form.validate_on_submit():
-        task_name = form.task_name.data
-        task = Task(user_id=current_user.id, content=task_name)
-        storage.new(task)
-        storage.save()
-    tasks = storage.get_user_tasks(current_user.id)
-    return render_template('timer.html', form=form, tasks=tasks)
+    return render_template('timer.html', form=form, user_id=user_id)
 
 
 @app.route("/about")
@@ -173,21 +167,12 @@ def account():
                            image_file=image_file, form=form)
 
 
-@app.route('/edit_task/<task_id>', methods=['GET', 'POST'])
-@login_required
-def edit_task(task_id):
-    pass
-
-
-@app.route('/delete_task/<task_id>', methods=['DELETE'])
-@login_required
-def delete_task(task_id):
-    task = storage.get(Task, task_id)
-    if not task or task.user_id != current_user.id:
-        flash('Task not found or unauthorized', 'error')
-        return redirect(url_for('home'))
-
-    storage.delete(task)
-    storage.save()
-    flash('Task deleted successfully')
+@app.route('/schedule_task/<task_id>', methods=['POST'])
+def schedule_task(task_id):
+    task_time = request.form['task-time']
+    task_date = request.form['task-date']
+    
+    # Save the task time and date to database or perform any other action
+    
+    # Return a JSON response
     return redirect(url_for('home'))

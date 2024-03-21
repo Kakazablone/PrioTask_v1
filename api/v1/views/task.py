@@ -6,7 +6,6 @@ from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
 
-
 @app_views.route('/tasks', methods=['GET'], strict_slashes=False)
 @swag_from('documentation/task/all_tasks.yml')
 def get_tasks():
@@ -130,17 +129,15 @@ def put_task(user_id, task_id):
     if not request.get_json():
         abort(400, description="Not a JSON")
 
-    tasks = storage.get_user_objects(user_id, Task)
-    if not tasks or task_id not in tasks:
+    task = storage.get(Task, task_id)
+    if not task:
         abort(404)
 
-    task = tasks[task_id]
-
-    ignore = ['id', 'user_id', 'created_at', 'updated_at']
+    ignore = ['id', 'user_id','created_at', 'updated_at']
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
-            task[key] = value
+            setattr(task, key, value)
 
     storage.save()
-    return make_response(jsonify(task), 200)
+    return make_response(jsonify(task.to_dict()), 200)

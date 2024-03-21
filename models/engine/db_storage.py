@@ -11,9 +11,9 @@ from models.custom import Custom
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+import logging
 
-classes = {"User": User, "Task": Task,
-           "BaseModel": BaseModel, "Custom": Custom}
+classes = {"User": User, "Task": Task, "Custom": Custom}
 
 
 class DBStorage:
@@ -54,6 +54,7 @@ class DBStorage:
     def save(self):
         """commit all changes of the current database session"""
         self.__session.commit()
+  
 
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""

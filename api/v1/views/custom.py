@@ -144,16 +144,14 @@ def put_custom(user_id, custom_id):
     if not request.get_json():
         abort(400, description="Not a JSON")
 
-    customs = storage.get_user_objects(user_id, Custom)
-    if not customs or custom_id not in customs:
+    custom = storage.get(Custom, custom_id)
+    if not custom:
         abort(404)
 
-    custom = customs[custom_id]
-
-    ignore = ['id', 'user_id', 'created_at', 'updated_at']
+    ignore = ['id', 'created_at', 'updated_at']
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
-            custom[key] = value
+            setattr(custom, key, value)
     storage.save()
-    return make_response(jsonify(custom), 200)
+    return make_response(jsonify(custom.to_dict()), 200)
