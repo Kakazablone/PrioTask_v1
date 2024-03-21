@@ -1,0 +1,69 @@
+tags:
+  - name: Custom
+    description: Endpoints related to custom objects
+
+paths:
+  /users/custom:
+    get:
+      summary: Retrieve all custom objects
+      description: Retrieves the list of all custom objects of all users.
+      tags:
+        - Custom
+      responses:
+        '200':
+          description: A list of custom objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Custom'
+              example:
+                - __class__: "Custom"
+                  created_at: "2024-03-21T06:51:00.125290"
+                  id: "ea6feaa7-0cb6-4ad1-806c-a02a81a51bf9"
+                  long_value: 10
+                  name: "Wagner"
+                  pomodoro_value: 35
+                  short_value: 5
+                  updated_at: "2024-03-21T06:51:00.125481"
+                  user_id: "4c2e6c80-147b-4ad4-965f-11f012e068b6"
+        '404':
+          description: No custom objects found
+
+components:
+  schemas:
+    Custom:
+      type: object
+      properties:
+        __class__:
+          type: string
+          description: Class of the custom object
+        created_at:
+          type: string
+          format: date-time
+          description: Time when the custom object was created
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the custom object
+        long_value:
+          type: integer
+          description: Long value of the custom object
+        name:
+          type: string
+          description: Name of the custom object
+        pomodoro_value:
+          type: integer
+          description: Pomodoro value of the custom object
+        short_value:
+          type: integer
+          description: Short value of the custom object
+        updated_at:
+          type: string
+          format: date-time
+          description: Time when the custom object was last updated
+        user_id:
+          type: string
+          format: uuid
+          description: UUID of the user who owns the custom object

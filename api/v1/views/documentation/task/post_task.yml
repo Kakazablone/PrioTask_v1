@@ -1,0 +1,76 @@
+tags:
+  - name: Tasks
+    description: Endpoints related to tasks
+
+paths:
+  /users/{user_id}/tasks:
+    post:
+      summary: Create a new task for a user
+      description: Creates a new task for a specific user identified by their ID.
+      tags:
+        - Task
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The UUID of the user for whom the task is being created.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: The content of the task
+              required:
+                - content
+            example:
+              content: "Finish project proposal"
+      responses:
+        '201':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                __class__: "Task"
+                content: "Finish project proposal"
+                created_at: "2024-03-21T06:26:05.249099"
+                id: "d94d3990-5380-4ff6-ab91-a57f097b6116"
+                updated_at: "2024-03-21T06:26:05.252775"
+                user_id: "4c2e6c80-147b-4ad4-965f-11f012e068b6"
+        '400':
+          description: Bad request - Invalid JSON or missing content
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        __class__:
+          type: string
+          description: Class of the task
+        content:
+          type: string
+          description: Content of the task
+        created_at:
+          type: string
+          format: date-time
+          description: Time when the task was created
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the task
+        updated_at:
+          type: string
+          format: date-time
+          description: Time when the task was last updated
+        user_id:
+          type: string
+          format: uuid
+          description: ID of the user associated with the task

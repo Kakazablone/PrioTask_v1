@@ -1,0 +1,72 @@
+tags:
+  - name: Tasks
+    description: Endpoints related to tasks
+
+paths:
+  /users/{user_id}/tasks:
+    get:
+      summary: Retrieve all tasks specific to a user
+      description: Retrieves the list of all task objects specific to a user identified by their ID.
+      tags:
+        - Task
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The UUID of the user whose tasks are to be retrieved.
+      responses:
+        '200':
+          description: A list of tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Task'
+              example:
+                "17ef52d7-5298-4ebc-ad13-f4c4a0147fa5":
+                  __class__: "Task"
+                  content: "My task"
+                  created_at: "2024-03-20T13:55:26.000784"
+                  id: "17ef52d7-5298-4ebc-ad13-f4c4a0147fa5"
+                  updated_at: "2024-03-20T13:55:26.000786"
+                  user_id: "4c2e6c80-147b-4ad4-965f-11f012e068b6"
+                "2ad6edd2-0751-4eb2-af96-10ed8ec77881":
+                  __class__: "Task"
+                  content: "My other task"
+                  created_at: "2024-03-20T13:32:46.578795"
+                  id: "2ad6edd2-0751-4eb2-af96-10ed8ec77881"
+                  updated_at: "2024-03-20T13:32:46.578797"
+                  user_id: "4c2e6c80-147b-4ad4-965f-11f012e068b6"
+        '404':
+          description: No tasks found for the user
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        __class__:
+          type: string
+          description: Class of the task
+        content:
+          type: string
+          description: Content of the task
+        created_at:
+          type: string
+          format: date-time
+          description: Time when the task was created
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the task
+        updated_at:
+          type: string
+          format: date-time
+          description: Time when the task was last updated
+        user_id:
+          type: string
+          format: uuid
+          description: ID of the user associated with the task

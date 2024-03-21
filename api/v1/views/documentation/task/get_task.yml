@@ -1,0 +1,57 @@
+tags:
+  - name: Tasks
+    description: Endpoints related to tasks
+
+paths:
+  /tasks/{task_id}:
+    get:
+      summary: Retrieve a specific task
+      description: Retrieves the details of a specific task identified by its ID.
+      tags:
+        - Task
+      parameters:
+        - in: path
+          name: task_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The UUID of the task to retrieve.
+      responses:
+        '200':
+          description: Details of the task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                __class__: "Task"
+                content: "A specific task, fetched without knowing user"
+                created_at: "2024-03-20T13:55:26.000784"
+                id: "17ef52d7-5298-4ebc-ad13-f4c4a0147fa5"
+                updated_at: "2024-03-20T13:55:26.000786"
+        '404':
+          description: Task not found
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        __class__:
+          type: string
+          description: Class of the task
+        content:
+          type: string
+          description: Content of the task
+        created_at:
+          type: string
+          format: date-time
+          description: Time when the task was created
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the task
+        updated_at:
+          type: string
+          format: date-time
+          description: Time when the task was last updated
