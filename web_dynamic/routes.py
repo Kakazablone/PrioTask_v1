@@ -166,13 +166,3 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
-
-@app.route('/schedule_task/<task_id>', methods=['POST'])
-def schedule_task(task_id):
-    task_time = request.form['task-time']
-    task_date = request.form['task-date']
-    
-    # Save the task time and date to database or perform any other action
-    
-    # Return a JSON response
-    return redirect(url_for('home'))

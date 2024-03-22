@@ -67,6 +67,55 @@ $(document).ready(function () {
     const taskScheduler = new TaskScheduler();
     const $taskList = $('#task-list ul');
 
+    $(document).on("click", ".schedule-events", function() {
+        // Open the schedule modal
+        $("#scheduleModal").show();
+    });
+
+    $(document).on("click", ".edit-task", function() {
+        const taskIdWithPrefix = $(this).closest("li").attr("id"); // Get the task id from the closest <li>
+        const taskId = taskIdWithPrefix.substring("task-".length); // Remove the "task-" prefix
+        $("#editModal").data("task-id", taskId); 
+        $("#editModal").show();
+    });
+    
+    // Close modal when close button is clicked
+    $(document).on("click", ".close", function() {
+        $(".modal").hide();
+    });
+    
+    // Close modal when clicked outside of modal
+    $(document).on("click", function(event) {
+        if ($(event.target).is(".modal")) {
+            // Hide the modal
+            $(".modal").hide();
+        }
+    });
+    
+    // Handle update button click
+    $("#updateButton").on("click", function() {
+        const taskId = $("#editModal").data("task-id");
+        const userId = $("body").data("user-id");
+        const content = $("#editedContent").val(); 
+    
+        $.ajax({
+            url: `http://127.0.0.1:5001/api/v1/users/${userId}/tasks/${taskId}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({ content: content }),
+            success: function(data) {
+                $('#editedContent').val('');
+                fetchTasks(userId);
+                console.log('Task updated:', data);
+                $("#editModal").hide(); // Close the modal after successful update
+                // You may want to update the UI with the updated task data here
+            },
+            error: function(xhr, status, error) {
+                console.error('Error updating task:', error);
+            }
+        });
+    });
+
     $(document).on('click', ".delete-task", function() {
         const task_id = $(this).data("task-id");
         const user_id = $('body').data('user-id');
@@ -78,9 +127,10 @@ $(document).ready(function () {
             success: function(response) {
                 // Remove the deleted task from the DOM
                 $('#task-' + task_id).remove();
-                if ($('.task').length === 0) {
-                    $taskList.append('<p>No tasks available.</p>'); // Append message
-                }
+                
+                // Fetch tasks again to update the task list
+                fetchTasks(user_id);
+                
                 console.log("Task deleted successfully.");
             },
             error: function(xhr, status, error) {
@@ -112,14 +162,14 @@ $(document).ready(function () {
                 
                 // Clear/reset the textarea
                 $taskTextArea.val('');
-                
-                // Call the function to fetch tasks immediately after successful POST
                 fetchTasks(userId);
+                const $toggleTasksButton = $('#toggle-tasks');
+                $toggleTasksButton.text('Hide Tasks');
             },
             error: function(xhr, status, error) {
                 // Handle error here
                 console.error('Error:', error);
-            }
+            },
         });
     });
     
@@ -153,49 +203,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    $(document).on("click", ".edit-task", function() {
-        const taskIdWithPrefix = $(this).closest("li").attr("id"); // Get the task id from the closest <li>
-        const taskId = taskIdWithPrefix.substring("task-".length); // Remove the "task-" prefix
-        $("#editModal").data("task-id", taskId); 
-        $("#editModal").show();
-    });
-    
-    // Close modal when close button is clicked
-    $(document).on("click", ".close", function() {
-        $("#editModal").hide();
-    });
-    
-    // Close modal when clicked outside of modal
-    $(document).on("click", function(event) {
-        if ($(event.target).is("#editModal")) {
-            // Hide the modal
-            $("#editModal").hide();
-        }
-    });
-    
-    // Handle update button click
-    $("#updateButton").on("click", function() {
-        const taskId = $("#editModal").data("task-id");
-        const userId = $("body").data("user-id");
-        const content = $("#editedContent").val(); 
-    
-        $.ajax({
-            url: `http://127.0.0.1:5001/api/v1/users/${userId}/tasks/${taskId}`,
-            type: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify({ content: content }),
-            success: function(data) {
-                fetchTasks(userId);
-                console.log('Task updated:', data);
-                $("#editModal").hide(); // Close the modal after successful update
-                // You may want to update the UI with the updated task data here
-            },
-            error: function(xhr, status, error) {
-                console.error('Error updating task:', error);
-            }
-        });
-    });
     
     function displayTasks(tasks) {
         // const $taskList = $('#task-list ul');
@@ -208,13 +215,10 @@ $(document).ready(function () {
                     <li id="task-${task.id}">
                         ${content}
                         <div class="button-group">
-                            <form action="schedule_task" method="POST">
-                                <button class="schedule-events btn" type="button">Schedule</button>
-                            </form>
+                            <button class="schedule-events btn" type="button">Schedule</button>
                             <button class="edit-task btn" type="button">Edit</button>
-                            <form action="delete_task" method="POST">
-                                <button class="delete-task btn" type="button" data-task-id="${task.id}">Delete</button>
-                            </form>
+                            <button class="delete-task btn" type="button" data-task-id="${task.id}">Delete</button>
+                           
                         </div>
                     </li>`;
                 
