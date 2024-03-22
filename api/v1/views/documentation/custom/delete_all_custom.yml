@@ -1,0 +1,26 @@
+tags:
+  - name: Custom
+    description: Endpoints related to custom objects
+
+paths:
+  /users/{user_id}/custom:
+    delete:
+      summary: Delete all custom objects for a user
+      description: Deletes all custom objects associated with a user identified by their ID.
+      tags:
+        - Custom
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The UUID of the user who owns the custom objects.
+      responses:
+        '200':
+          description: All custom objects successfully deleted
+        '404':
+          description: Custom objects or user not found
+
+components: {}
