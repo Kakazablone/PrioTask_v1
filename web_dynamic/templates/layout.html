@@ -24,10 +24,12 @@
         {% if current_user.is_authenticated %}
         <a class="right" href="{{ url_for('account') }}">Account</a>
         <div class="dropdown right">
-          <button class="dropdown-btn">Customize <span class="arrow"></span></button>          
+         
+          <button class="dropdown-btn" id="custom_btn">Customize <span class="arrow"></span></button>          
           <form class="dropdown-content" id="customTimerForm">
             
             <div class="check" id="customTimersContainer">
+               <span id="emoji">🧑‍💻</span><p class="focus">Focus Level</p>
             <!-- Custom timers will be appended here dynamically -->
         </div>
             <div class="check">

@@ -6,7 +6,6 @@ let shortBreakTime = 5;
 let longBreakTime = 15;
 let timerRunning = false;
 
-
 $(document).ready(function () {
   let dataLoaded = false;
   selectTimer(25); // Select "Pomodoro" on page load
@@ -60,6 +59,7 @@ $(document).ready(function () {
   });
   $(".dropdown-btn").click(function () {
     $(this).next(".dropdown-content").toggle();
+
     let user_id = $("#user_id").data("id");
 
     // Check if data has already been loaded, if not, make AJAX request to fetch custom data
@@ -117,7 +117,7 @@ $(document).ready(function () {
           } else {
             console.error("Custom data is null or undefined:", customData);
           }
-        }
+        },
       });
     }
   });
@@ -146,8 +146,6 @@ $(document).ready(function () {
       },
     });
   }
-
-
 
   $("#saveCustom").click(function (event) {
     event.preventDefault(); // Prevent default form submission
@@ -223,8 +221,6 @@ $(document).ready(function () {
             $(".delete-custom").on("click", function () {
               let customId = $(this).data("custom-id");
               deleteCustom(customId);
-
-              
             });
 
             function deleteCustom(customId) {
@@ -257,7 +253,6 @@ $(document).ready(function () {
         });
       },
     });
-    
   });
 
   $(document).on(
@@ -282,7 +277,11 @@ $(document).ready(function () {
       }
     }
   );
-  
+  $(document).on("click", function (event) {
+    if (!$(event.target).closest(".dropdown").length) {
+      $(".dropdown-content").hide();
+    }
+  });
 });
 
 function startTimer() {
@@ -359,35 +358,4 @@ function selectTimer(minutes) {
 function formatTime(time) {
   // Add leading zero if time is less than 10
   return time < 10 ? "0" + time : time;
-}
-function appendCustomRadio(custom) {
-  let radioHtml =
-    '<div class="check">' +
-    "<label>" +
-    '<input type="radio" name="time-option" data-pomodoro="' +
-    custom.pomodoro_value +
-    '" data-short="' +
-    custom.short_value +
-    '" data-long="' +
-    custom.long_value +
-    '" value="' +
-    custom.name +
-    '" data-custom-id="' +
-    custom.custom_id +
-    '">' +
-    custom.name +
-    ' <span class="default">' +
-    custom.pomodoro_value +
-    "min . " +
-    custom.short_value +
-    "min . " +
-    custom.long_value +
-    "min</span>" +
-    '<input type="button" class="delete-custom" value="Delete" data-custom-id="' +
-    custom.custom_id +
-    '">' +
-    "</label>" +
-    "</div>";
-
-  $("#customTimersContainer").append(radioHtml);
 }
