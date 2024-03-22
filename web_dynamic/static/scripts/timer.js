@@ -6,9 +6,9 @@ let shortBreakTime = 5;
 let longBreakTime = 15;
 let timerRunning = false;
 
-$(document).ready(function () {
-  loadCustomTimers();
 
+$(document).ready(function () {
+  let dataLoaded = false;
   selectTimer(25); // Select "Pomodoro" on page load
   $("#pomodoro").click(function () {
     setTimeout(() => {
@@ -20,7 +20,6 @@ $(document).ready(function () {
     }, 50);
   });
 
-
   $("#shortbreak").click(function () {
     setTimeout(() => {
       stopTimer(); // Stop the timer before switching
@@ -31,25 +30,22 @@ $(document).ready(function () {
     }, 50);
   });
 
-    $("#longbreak").click(function () {
-      setTimeout(() => {
-        stopTimer(); // Stop the timer before switching
-        selectTimer(longBreakTime);
-        $(this).addClass("selected");
-        $("#pomodoro, #shortbreak").removeClass("selected");
-        $("body, html").css("background-color", "#5A666E");
-      }, 50);
-    });
+  $("#longbreak").click(function () {
+    setTimeout(() => {
+      stopTimer(); // Stop the timer before switching
+      selectTimer(longBreakTime);
+      $(this).addClass("selected");
+      $("#pomodoro, #shortbreak").removeClass("selected");
+      $("body, html").css("background-color", "#5A666E");
+    }, 50);
+  });
 
-    $("#start").click(function () {
-      if (!timerRunning) {
-        startTimer();
-        timerRunning = true;
-      }
-    });
-
-
-
+  $("#start").click(function () {
+    if (!timerRunning) {
+      startTimer();
+      timerRunning = true;
+    }
+  });
 
   $("#pause").click(function () {
     if (timerRunning) {
@@ -64,108 +60,230 @@ $(document).ready(function () {
   });
   $(".dropdown-btn").click(function () {
     $(this).next(".dropdown-content").toggle();
-  });
-  
+    let user_id = $("#user_id").data("id");
 
-  // Event listener for custom timer form submission
-  $("#saveCustom").click(function (event) {
-  event.preventDefault();
-  
-  let formData = $("#customTimerForm").serialize();
-  
-  $.post("/custom_timer", formData, function (response) {
-    console.log("Data saved successfully:", response);      
-    
-    // Dynamically add a radio button to the dropdown
-    let timer = response.timer;
-    let radioHtml =
-      '<div class="check"><label><input type="radio" name="time-option" data-pomodoro="' +
-      timer.pomodoro_value +
-      '" data-short="' +
-      timer.short_value +
-      '" data-long="' +
-      timer.long_value +
-      '" value="' +
-      timer.name +
-      '"> ' +
-      timer.name +
-      ' <span class="default">' +
-      timer.pomodoro_value +
-      "min . " +
-      timer.short_value +
-      "min . " +
-      timer.long_value +
-      "min</span></label></div>";
-                   
-    $("#customTimersContainer").append(radioHtml);
-    saveCustomTimers();
-  });
-});
-$(document).on(
-  "click",
-  '#customTimersContainer input[type="radio"]',
-  function () {
-    let pomodoro = parseInt($(this).data("pomodoro"));
-    let short = parseInt($(this).data("short"));
-    let long = parseInt($(this).data("long"));
+    // Check if data has already been loaded, if not, make AJAX request to fetch custom data
+    if (!dataLoaded) {
+      $.ajax({
+        url: "http://127.0.0.1:5001/api/v1/users/" + user_id + "/custom",
+        type: "GET",
+        dataType: "json",
+        success: function (customData) {
+          console.log("Received custom data:", customData);
 
-    pomodoroTime = pomodoro;
-    shortBreakTime = short;
-    longBreakTime = long;
+          // Check if customData is not null and not undefined
+          if (customData !== null && customData !== undefined) {
+            // Set dataLoaded flag to true to indicate data has been loaded
+            dataLoaded = true;
 
-    // Check which timer option is currently selected
-    if ($("#pomodoro").hasClass("selected")) {
-      selectTimer(pomodoro);
-    } else if ($("#shortbreak").hasClass("selected")) {
-      selectTimer(short);
-    } else if ($("#longbreak").hasClass("selected")) {
-      selectTimer(long);
+            // Assuming customData is an object with properties
+            $.each(customData, function (key, value) {
+              let radioHtml =
+                '<div class="check">' +
+                "<label>" +
+                '<input type="radio" name="time-option" data-pomodoro="' +
+                value.pomodoro_value +
+                '" data-short="' +
+                value.short_value +
+                '" data-long="' +
+                value.long_value +
+                '" value="' +
+                value.name +
+                '" data-custom-id="' +
+                value.id +
+                '">' +
+                value.name +
+                ' <span class="default">' +
+                value.pomodoro_value +
+                "min . " +
+                value.short_value +
+                "min . " +
+                value.long_value +
+                "min</span>" +
+                '<input type="button" class="delete-custom" value="Delete" data-custom-id="' +
+                value.id +
+                '">' +
+                "</label>" +
+                "</div>";
+
+              $("#customTimersContainer").append(radioHtml);
+            });
+
+            // Bind click event to dynamically created delete buttons
+            $(".delete-custom").on("click", function () {
+              let customId = $(this).data("custom-id");
+              deleteCustom(customId);
+            });
+          } else {
+            console.error("Custom data is null or undefined:", customData);
+          }
+        }
+      });
     }
+  });
+
+  // Define deleteCustom function outside click event handler
+  function deleteCustom(customId) {
+    let user_id = $("#user_id").data("id");
+
+    // Send DELETE request to delete custom
+    $.ajax({
+      type: "DELETE",
+      url:
+        "http://127.0.0.1:5001/api/v1/users/" + user_id + "/custom/" + customId,
+      success: function (response) {
+        // Handle success response
+        console.log("Custom timer deleted successfully:", response);
+
+        // Remove the radio button from the DOM
+        $("input[type='radio'][data-custom-id='" + customId + "']")
+          .parent()
+          .parent()
+          .remove();
+      },
+      error: function (error) {
+        console.error("Error deleting custom timer:", error);
+      },
+    });
   }
-);
-function loadCustomTimers() {
-  let customTimers = JSON.parse(localStorage.getItem("customTimers")) || [];
-  customTimers.forEach(function (timer) {
-    let radioHtml =
-      '<div class="check"><label><input type="radio" name="time-option" data-pomodoro="' +
-      timer.pomodoro_value +
-      '" data-short="' +
-      timer.short_value +
-      '" data-long="' +
-      timer.long_value +
-      '" value="' +
-      timer.name +
-      '"> ' +
-      timer.name +
-      ' <span class="default">' +
-      timer.pomodoro_value +
-      "min . " +
-      timer.short_value +
-      "min . " +
-      timer.long_value +
-      "min</span></label></div>";
-    $("#customTimersContainer").append(radioHtml);
-  });
-}
 
-// Function to save custom timers to local storage
-function saveCustomTimers() {
-  let customTimers = [];
-  $("#customTimersContainer input[type='radio']").each(function () {
-    let timer = {
-      name: $(this).val(),
-      pomodoro_value: $(this).data("pomodoro"),
-      short_value: $(this).data("short"),
-      long_value: $(this).data("long"),
+
+
+  $("#saveCustom").click(function (event) {
+    event.preventDefault(); // Prevent default form submission
+    let user_id = $("#user_id").data("id");
+
+    // Get form data
+    let formData = {
+      name: $("#name").val(),
+      pomodoro_value: parseInt($("#pomodoro_value").val()),
+      short_value: parseInt($("#short_value").val()),
+      long_value: parseInt($("#long_value").val()),
     };
-    customTimers.push(timer);
+    console.log(formData);
+
+    // Send POST request to save custom
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:5001/api/v1/users/" + user_id + "/custom",
+      data: JSON.stringify(formData),
+      contentType: "application/json",
+      success: function (response) {
+        // Handle success response
+        console.log("Data saved successfully:", response);
+
+        // Extract custom ID from the response
+        let custom_id = response.id;
+
+        // Send GET request to fetch specific custom using the obtained custom ID
+        $.ajax({
+          type: "GET",
+          url:
+            "http://127.0.0.1:5001/api/v1/users/" +
+            user_id +
+            "/custom/" +
+            custom_id,
+          dataType: "json",
+          success: function (customData) {
+            // Handle success response for fetching specific custom
+            console.log("Fetched custom data:", customData);
+
+            // Create radio button dynamically
+            let radioHtml =
+              '<div class="check">' +
+              "<label>" +
+              '<input type="radio" name="time-option" data-pomodoro="' +
+              customData.pomodoro_value +
+              '" data-short="' +
+              customData.short_value +
+              '" data-long="' +
+              customData.long_value +
+              '" value="' +
+              customData.name +
+              '" data-custom-id="' +
+              custom_id +
+              '">' + // Add data-custom-id attribute
+              customData.name +
+              ' <span class="default">' +
+              customData.pomodoro_value +
+              "min . " +
+              customData.short_value +
+              "min . " +
+              customData.long_value +
+              "min</span>" +
+              '<input type="button" class="delete-custom" value="Delete" data-custom-id="' +
+              custom_id +
+              '">' +
+              "</label>" +
+              "</div>";
+
+            $("#customTimersContainer").append(radioHtml);
+
+            // Event listener for delete button
+            $(".delete-custom").on("click", function () {
+              let customId = $(this).data("custom-id");
+              deleteCustom(customId);
+
+              
+            });
+
+            function deleteCustom(customId) {
+              let user_id = $("#user_id").data("id");
+
+              // Send DELETE request to delete custom
+              $.ajax({
+                type: "DELETE",
+                url:
+                  "http://127.0.0.1:5001/api/v1/users/" +
+                  user_id +
+                  "/custom/" +
+                  customId,
+                success: function (response) {
+                  // Handle success response
+                  console.log("Custom timer deleted successfully:", response);
+
+                  // Remove the radio button from the DOM
+                  $("input[type='radio'][data-custom-id='" + customId + "']")
+                    .parent()
+                    .parent()
+                    .remove();
+                },
+                error: function (error) {
+                  console.error("Error deleting custom timer:", error);
+                },
+              });
+            }
+          },
+        });
+      },
+    });
+    
   });
-  localStorage.setItem("customTimers", JSON.stringify(customTimers));
-}
 
+  $(document).on(
+    "click",
+    '#customTimersContainer input[type="radio"]',
+    function () {
+      let pomodoro = parseInt($(this).data("pomodoro"));
+      let short = parseInt($(this).data("short"));
+      let long = parseInt($(this).data("long"));
+
+      pomodoroTime = pomodoro;
+      shortBreakTime = short;
+      longBreakTime = long;
+
+      // Check which timer option is currently selected
+      if ($("#pomodoro").hasClass("selected")) {
+        selectTimer(pomodoro);
+      } else if ($("#shortbreak").hasClass("selected")) {
+        selectTimer(short);
+      } else if ($("#longbreak").hasClass("selected")) {
+        selectTimer(long);
+      }
+    }
+  );
+  
 });
-
-
 
 function startTimer() {
   // Start the timer
@@ -211,16 +329,17 @@ function updateTimer() {
   }
   updateDisplay(minutesRemaining, secondsRemaining);
 }
+
 function resetTimer() {
-    // Reset timer to initial value
-    if ($("#pomodoro").hasClass("selected")) {
-        selectTimer(25);
-    } else if ($("#shortbreak").hasClass("selected")) {
-        selectTimer(5);
-    } else if ($("#longbreak").hasClass("selected")) {
-        selectTimer(15);
-    }
+  // Reset timer to initial value
+  if ($("#pomodoro").hasClass("selected")) {
+    selectTimer(25);
+  } else if ($("#shortbreak").hasClass("selected")) {
+    selectTimer(5);
+  } else if ($("#longbreak").hasClass("selected")) {
+    selectTimer(15);
   }
+}
 
 function updateDisplay() {
   // Update displayed minutes and seconds
@@ -241,5 +360,34 @@ function formatTime(time) {
   // Add leading zero if time is less than 10
   return time < 10 ? "0" + time : time;
 }
+function appendCustomRadio(custom) {
+  let radioHtml =
+    '<div class="check">' +
+    "<label>" +
+    '<input type="radio" name="time-option" data-pomodoro="' +
+    custom.pomodoro_value +
+    '" data-short="' +
+    custom.short_value +
+    '" data-long="' +
+    custom.long_value +
+    '" value="' +
+    custom.name +
+    '" data-custom-id="' +
+    custom.custom_id +
+    '">' +
+    custom.name +
+    ' <span class="default">' +
+    custom.pomodoro_value +
+    "min . " +
+    custom.short_value +
+    "min . " +
+    custom.long_value +
+    "min</span>" +
+    '<input type="button" class="delete-custom" value="Delete" data-custom-id="' +
+    custom.custom_id +
+    '">' +
+    "</label>" +
+    "</div>";
 
-
+  $("#customTimersContainer").append(radioHtml);
+}

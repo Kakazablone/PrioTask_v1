@@ -254,7 +254,7 @@ def home():
         task = Task(user_id=current_user.id, content=task_name)
         storage.new(task)
         storage.save()
-    tasks = storage.get_user_tasks(current_user.id)
+    tasks = storage.get_user_objects(current_user.id, Task)
     return render_template('timer.html', form=form, tasks=tasks)
 
 
@@ -394,3 +394,32 @@ def delete_task(task_id):
     storage.save()
     flash('Task deleted successfully')
     return redirect(url_for('home'))
+
+@app.route('/custom_timer', methods=['POST', 'GET'])
+@login_required
+def custom_timer():
+    # Parse request data
+    form = request.form
+    # user_id = current_user.id
+    name = request.form['name']
+    pomodoro_value = request.form['pomodoro_value']
+    short_value = request.form['short_value']
+    long_value = request.form['long_value']
+
+    # Check if user already has a custom entry
+    custom_entry = Custom(current_user.id, name=name, pomodoro_value=pomodoro_value, short_value=short_value, long_value=long_value)
+
+    if custom_entry:
+        storage.new(custom_entry)
+        storage.save()
+    else:
+        print("Field not updated")
+
+
+    return jsonify({'timer': {
+        'name': custom_entry.name,
+        'pomodoro_value': custom_entry.pomodoro_value,
+        'short_value': custom_entry.short_value,
+        'long_value': custom_entry.long_value
+    }})
+
