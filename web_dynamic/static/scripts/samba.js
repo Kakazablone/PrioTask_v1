@@ -181,14 +181,6 @@ $(document).ready(function () {
         });
     });
     
-    $('#toggle-tasks').click(function() {
-        // Get user_id from body data attribute
-        const userId = $('body').data('user-id');
-        
-        // Call the function to fetch tasks when the button is clicked
-        fetchTasks(userId);
-    });
-    
     function fetchTasks(userId) {
         // Send GET request
         $.ajax({
@@ -205,26 +197,17 @@ $(document).ready(function () {
                 console.error('Error:', error);
                 if (xhr.status === 404) {
                     // Append message if status is 404
+                    const $taskList = $('#task-list ul');
                     $taskList.empty();
                     $taskList.append('<p>No tasks available.</p>');
+                    $('#task-list').fadeIn('slow');
                 }
             }
         });
     }
-
-    flatpickr("#taskDate", {
-        dateFormat: "Y-m-d",
-    });
-    
-    flatpickr("#taskTime", {
-        enableTime: true,
-        noCalendar: true,
-        dateFormat: "H:i",
-        time_24hr: true
-    });
     
     function displayTasks(tasks) {
-        // const $taskList = $('#task-list ul');
+        const $taskList = $('#task-list ul');
         $taskList.empty(); // Clear existing tasks
         
         if (tasks) {
@@ -248,6 +231,37 @@ $(document).ready(function () {
         }
         
         // Show the task list
-        $('#task-list').show();
-    }    
+        $('#task-list').fadeIn('slow');
+    }
+
+    $(document).on('click', '#toggle-tasks', function() {
+        let $toggleTasksButton = $('#toggle-tasks');
+        let userId = $('body').data('user-id');
+        
+        if ($toggleTasksButton.text() === 'Hide Tasks') {
+            // Hide the task list
+            $('#task-list').fadeOut('slow');
+            
+            // Switch toggle tasks button back to "Show Tasks"
+            $toggleTasksButton.text('Show Tasks');
+        } else {
+            // Show tasks
+            fetchTasks(userId);
+            
+            // Switch toggle tasks button to "Hide Tasks"
+            $toggleTasksButton.text('Hide Tasks');
+        }
+    });
+    
+    
+    flatpickr("#taskDate", {
+        dateFormat: "Y-m-d",
+    });
+    
+    flatpickr("#taskTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true
+    });
 }); 
