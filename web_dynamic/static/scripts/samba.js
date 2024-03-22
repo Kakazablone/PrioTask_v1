@@ -96,7 +96,11 @@ $(document).ready(function () {
     $("#updateButton").on("click", function() {
         const taskId = $("#editModal").data("task-id");
         const userId = $("body").data("user-id");
-        const content = $("#editedContent").val(); 
+        const content = $("#editedContent").val();
+        if (!content.trim()) {
+            alert("Field cannot be blank");
+            return;
+        }
     
         $.ajax({
             url: `http://127.0.0.1:5001/api/v1/users/${userId}/tasks/${taskId}`,
@@ -140,14 +144,18 @@ $(document).ready(function () {
         });
     });
 
-    $('.tasks form').submit(function(event) {
-        event.preventDefault(); // Prevent default form submission behavior
+    $(document).on('click', '#NewTaskButton', function() {
+        // Reference to the textarea field
+        let $taskTextArea = $('#NewTask');
         
         // Get user_id from body data attribute
         let userId = $('body').data('user-id');
-        
-        // Reference to the textarea field
-        let $taskTextArea = $('textarea[name=task_name]');
+
+        if ($taskTextArea.val().trim() === '') {
+            // Show flash message for empty field
+            $('#error-message').text('Task field cannot be blank').fadeIn().delay(3000).fadeOut();
+            return; // Exit function
+        }
         
         // Send POST request
         $.ajax({
@@ -203,6 +211,17 @@ $(document).ready(function () {
             }
         });
     }
+
+    flatpickr("#taskDate", {
+        dateFormat: "Y-m-d",
+    });
+    
+    flatpickr("#taskTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true
+    });
     
     function displayTasks(tasks) {
         // const $taskList = $('#task-list ul');

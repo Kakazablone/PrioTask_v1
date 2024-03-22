@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="../static/styles/timer.css">
     <script type="text/javascript" src="../static/scripts/timer.js"></script>
     <script type="text/javascript" src="../static/scripts/samba.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cambo&family=Khand:wght@300;400;500;600;700&family=Madimi+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   
     <title>Priotask</title>
 </head>
@@ -56,7 +58,7 @@
       <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Edit Task</h2>
-          <textarea id="editedContent" rows="4" cols="50"></textarea>
+          <textarea id="editedContent" rows="2" cols="50"></textarea>
           <button class="task-submit" id="updateButton">Update</button>
       </div>
     </div>
@@ -65,9 +67,9 @@
         <span class="close">&times;</span>
         <h2>Schedule Task</h2>
         <label for="taskDate">Date:</label>
-        <input type="date" id="taskDate" name="taskDate">
+        <input type="text" id="taskDate" name="taskDate">
         <label for="taskTime">Time:</label>
-        <input type="time" id="taskTime" name="taskTime">
+        <input type="text" id="taskTime" name="taskTime">
         <button class="task-submit" id="scheduleButton">Schedule</button>
       </div>
     </div>  

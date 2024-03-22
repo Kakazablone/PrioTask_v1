@@ -24,23 +24,16 @@
                 <button id="stop">Stop</button>
             </div>
             <div class="tasks">
-                <form method="post">
-                    {{ form.hidden_tag() }}
-                    <div>
-                        {{ form.task_name(class="task-name") }}
-                        {% for error in form.task_name.errors %}
-                            <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </div>
-                    <div>
-                        {{ form.submit(class="task-submit") }}
-                        <button class="task-submit" type="button" id="toggle-tasks">Show Tasks</button>
-                    </div>
-                </form>
+                <div id="error-message" style="display: none; color: red;"></div>
+                <textarea class="task-name" id="NewTask" rows="2" cols="50"></textarea>
+                <button class="task-submit" id="NewTaskButton">Add Task</button>
+                <div id="success-message" style="display: none; color: rgba(255, 255, 0, 0.753);">Task added successfully!</div>
+                <button class="task-submit" type="button" id="toggle-tasks">Show Tasks</button>
             </div>
         </div>
         <div class="task-list" id="task-list" style="display: none;">
             <h2>Tasks</h2>
+
             <ul id="task-items">
         </div>
     </section>
