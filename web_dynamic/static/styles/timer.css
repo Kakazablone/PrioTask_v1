@@ -16,20 +16,21 @@
 .dashboard {
   background-color: var(--color-secondary);
   display: flex;
-  align-content: space-between;
+  justify-content: space-around;
+  align-content: center;
+  height: 6vh;
   align-items: center;
   font-size: medium;
   color: var(--color-font);
 }
-.left {
-  margin-right: auto;
+
+.dashboard a {
+  text-decoration: none;
 }
-.right {
-  margin-left: 30px;
-}
+
 .right button {
   color: var(--color-font);
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
   font-size: medium;
   border-radius: 50%;
   padding: 10px;
@@ -40,11 +41,12 @@ body {
   height: 100%;
   background-color: var(--color-primary);
   font-size: 1.6rem;
-  font-family: "Open sans", sans-serif;
+  font-family: "Khand";
 }
 #italic {
   font-style: italic;
   font-size: medium;
+  color:var(--color-font);
 }
 
 p,
@@ -53,12 +55,13 @@ h1 {
 }
 .panel p.selected {
   color: aqua;
-  text-decoration: underline;
+  text-decoration: none;
 }
 button {
+  font-family: Cambo;
   font-size: 3.2rem;
   margin: 10px;
-  color: white;
+  color: var(--color-primary);
 }
 
 h1 {
@@ -71,13 +74,17 @@ h1 {
 
 section {
   display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   align-items: center;
+  margin: 0;
   height: 100%;
 }
 
 .container {
-  width: min(42.5rem, 100%);
-  margin-inline: auto;
+  width: 60%;
+  margin: 0;
+  margin-bottom: 30px;
   padding-inline: 2rem;
   display: flex;
   justify-content: center;
@@ -100,6 +107,8 @@ section {
 .panel p {
   opacity: 0.8;
   transition: 1s ease-in;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .panel p.active {
@@ -162,8 +171,10 @@ section {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  color: var(--color-font);
 }
 
+<<<<<<< HEAD
 .task-container {
   background-color: white; /* Set background color to white */
   padding: 20px; /* Add padding for spacing */
@@ -242,4 +253,480 @@ section {
 
 #task-list {
   margin-top: 10px;
+=======
+
+.login-content-section {
+  display: block;
+  width: 25%;
+  height: auto;
+  background-color: lightcyan;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 15px 0;
+  max-width: auto;
+  margin-bottom: 0;
+}
+
+.account-content-sction{
+   display: block;
+  width: 25%;
+  height: auto;
+  background-color: lightcyan;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 15px 0;
+  max-width: auto;
+  margin-bottom: 0;
+}
+
+.register-content-section {
+  display: block;
+  width: 25%;
+  height: auto;
+  background-color: lightcyan;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 15px 0;
+  max-width: auto;
+  margin-bottom: 0;
+}
+
+fieldset {
+  border: none;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: dodgerblue;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
+
+.btn:hover {
+  background-color: #4CAF50;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  background-color: #45a049;
+}
+
+.text-muted a {
+  color: dodgerblue;
+  text-decoration: none;
+  margin-left: 3px;
+}
+
+.text-muted a:hover {
+  text-decoration: underline;
+}
+
+.border-top {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.text-muted {
+  display: inline-block;
+  color: white;
+}
+
+.alert-container {
+  text-align: center;
+}
+
+.alert {
+  color: white;
+  margin-top: 30px;
+}
+
+legend {
+  color: purple;
+  font-size: 30px;
+}
+
+.rounded-circle {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#custom_btn{
+  background-color: var(--color-secondary);
+  color: purple;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 2%;
+  cursor: pointer;
+  font-family: "Khand";
+  padding: 0px;
+  
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: hsl(358, 78%, 69%, 60%);
+  width: 15%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 10px;
+  box-sizing: content-box;
+  
+  
+}
+
+
+.dropdown.show .dropdown-content {
+  display: block;
+}
+.arrow {
+  display: inline-block;
+  width: 10px;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid black;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+.dropdown.show .arrow {
+  transform: rotate(90deg);
+}
+.dropdown-content .default{
+  display: block;
+}
+.range-input{
+  display: block;
+  width: 20%;
+}
+.default{
+  margin-left: 35px;
+}
+#customValue{
+  margin-left: 40px;
+}
+#shortValue{
+  margin-left: 40px;
+}
+#longValue{
+  margin-left: 40px;
+}
+
+
+.task-form {
+  margin-top: 20px;
+}
+
+.task-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-form form div {
+  margin-bottom: 10px;
+}
+
+.task-list {
+  display: block;
+  background-color: rgba(211, 211, 211, 0.349);
+  border-radius: 25px 0 25px 0; 
+  padding: 40px;
+  width: 400px;
+}
+
+.task-list ul {
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-list ul li {
+  word-wrap: break-word;
+  font-size: 24px;
+  width: 100%;
+  margin: 0;
+  color: white;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+#toggle-tasks {
+  font-family: Khand;
+  padding: 3px 15px;
+  margin: 0px;
+  font-size: 18px;
+}
+
+#NewTaskButton {
+  font-family: Khand;
+  padding: 0;
+  margin: 10px;
+  font-size: 24px;
+  width: 25%;
+  height: auto;
+}
+
+.task-name {
+  width: auto;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: border-color 0.3s ease;
+}
+
+.task-name:focus {
+  border-color: #007bff;
+}
+
+.task-submit {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-submit:hover {
+  background-color: #0056b3;
+}
+
+.task-list .btn {
+  padding: 3px 12px;
+  font-family: Khand;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px;
+}
+
+.task-list .button-group {
+  display: flex;
+}
+
+#emoji{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+}
+.focus{
+  text-align: center;
+}
+
+ /* Modal styles */
+ .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.514); /* Black w/ opacity */
+  -webkit-backdrop-filter: blur(5px); 
+  backdrop-filter: blur(5px); 
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefeb6;
+  margin: 20% auto; /* 20% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+  border-radius: 0 15px 0 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Close button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#updateButton {
+  width: 30%;
+  font-family: Khand;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.edit-task {
+  padding: 0;
+}
+
+#scheduleButton {
+  width: 30%;
+  font-family: Khand;
+  font-size: 16px;
+  padding: 5px;
+}
+
+/* Style for the input fields */
+.modal-content input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  width: 80%;
+  font-family: Cambo;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Style for the input fields when focused */
+.modal-content input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Style for the input fields when hovered */
+.modal-content input[type="text"]:hover {
+  border-color: #007bff;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none; /* Disable resizing */
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-family: Cambo;
+}
+
+
+.tasks textarea.task-name {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.tasks textarea.task-name:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+textarea:hover {
+  border-color: #007bff;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.dropdown-content input {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 70%;
+  font-family: Cambo;
+  font-weight: 500;
+}
+
+.dropdown-content input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+#saveCustom input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.check {
+  font-size: 17px;
+}
+
+.delete-custom{
+  margin-top: 20px;
+  background-color: #007bffd0;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-custom:hover {
+  background-color: #45a049c9;
+}
+
+label[for="name"],
+label[for="pomodoro_value"],
+label[for="short_value"],
+label[for="long_value"],
+label[for="saveCustom"] {
+  font-weight: 600;
+  color: skyblue;
+}
+
+/* Optional: Styling for radio button */
+input[type="radio"] {
+  /* margin-right: 5px; */
+  margin: 0;
+  width: 10%;
+  padding: 5px;
+}
+
+#customTimersContainer {
+  font-size: 18px;
+>>>>>>> master
 }

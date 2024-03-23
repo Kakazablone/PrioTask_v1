@@ -7,7 +7,8 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from models import storage
 from models.user import User
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField
+from wtforms import SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from wtforms.validators import ValidationError
 
@@ -46,6 +47,7 @@ class RegistrationForm(FlaskForm):
         """This function is used to validate email input
         from user to avoid duplication
         """
+        email.data = email.data.lower()
         email = email.data
         users = storage.all(User)
         for user in users.values():
@@ -63,6 +65,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+    def validate_email(self, email):
+        email.data = email.data.lower()
 
 
 class UpdateAccountForm(FlaskForm):
@@ -91,9 +96,16 @@ class UpdateAccountForm(FlaskForm):
     def validate_email(self, email):
         """This function is used to validate email input
         from user to avoid duplication"""
+        email.data = email.data.lower()
         if email.data != current_user.email:
             users = storage.all(User)
             for user in users.values():
                 if user.email == email:
                     raise ValidationError('Email already exists.\
                                           Please choose a different one.')
+
+
+class TaskForm(FlaskForm):
+    task_name = TextAreaField('Task', validators=[DataRequired()],
+                              render_kw={"style": "width: 300px;"})
+    submit = SubmitField('Add Task')

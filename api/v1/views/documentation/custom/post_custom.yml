@@ -1,0 +1,91 @@
+tags:
+  - name: Custom
+    description: Endpoints related to custom objects
+
+paths:
+  /users/{user_id}/custom:
+    post:
+      summary: Create a new custom object
+      description: Creates a new custom object associated with a user identified by their ID.
+      tags:
+        - Custom
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The UUID of the user who owns the custom object.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the custom object
+                pomodoro_value:
+                  type: integer
+                  description: Pomodoro value of the custom object
+                short_value:
+                  type: integer
+                  description: Short value of the custom object
+                long_value:
+                  type: integer
+                  description: Long value of the custom object
+              required:
+                - name
+                - pomodoro_value
+                - short_value
+                - long_value
+            example:
+              name: "Custom Name"
+              pomodoro_value: 25
+              short_value: 5
+              long_value: 10
+      responses:
+        '201':
+          description: Custom object created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Custom'
+        '400':
+          description: Bad request, missing or invalid parameters
+
+components:
+  schemas:
+    Custom:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the custom object
+        name:
+          type: string
+          description: Name of the custom object
+        pomodoro_value:
+          type: integer
+          description: Pomodoro value of the custom object
+        short_value:
+          type: integer
+          description: Short value of the custom object
+        long_value:
+          type: integer
+          description: Long value of the custom object
+        user_id:
+          type: string
+          format: uuid
+          description: The UUID of the user who owns the custom object
+        created_at:
+          type: string
+          format: date-time
+          description: Time when the custom object was created
+        updated_at:
+          type: string
+          format: date-time
+          description: Time when the custom object was last updated

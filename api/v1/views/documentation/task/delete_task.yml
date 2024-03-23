@@ -1,0 +1,31 @@
+tags:
+  - name: Tasks
+    description: Endpoints related to tasks
+
+paths:
+  /users/{user_id}/tasks/{task_id}:
+    delete:
+      summary: Delete a specific task for a user
+      description: Deletes a specific task identified by its ID for a user identified by their ID.
+      tags:
+        - Task
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The UUID of the user associated with the task.
+        - in: path
+          name: task_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The UUID of the task to delete.
+      responses:
+        '200':
+          description: Task deleted successfully
+        '404':
+          description: Task or user not found

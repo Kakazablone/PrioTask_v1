@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +19,14 @@
         <span class="right"><button>Login</button></span>
     </div>
     <section>
+=======
+{% extends "layout.html" %}
+{% block content %}
+     <section >
+>>>>>>> master
         <div class="container">
-            <h1>PRIOTASK <span id="italic">productive focus</span></h1>
+            <h1>PRIOTASK</h1>
+            <span id="italic">productive focus</span>
             <div class="panel">
                 <p id="pomodoro" class="selected">Pomodoro</p>
                 <p id="shortbreak" class="selected">Short break</p>
@@ -35,11 +42,24 @@
                 </div>
             </div>
             <div class="controls">
-                <button id="start" >Start</button>
+                <button id="start">Start</button>
                 <button id="pause">Pause</button>
                 <button id="stop">Stop</button>
             </div>
+            <div class="tasks">
+                <div id="error-message" style="display: none; color: red;"></div>
+                <textarea class="task-name" id="NewTask" rows="2" cols="50"></textarea>
+                <button class="task-submit" id="NewTaskButton">Add Task</button>
+                <div id="success-message" style="display: none; color: rgba(255, 255, 0, 0.753);">Task added successfully!</div>
+                <button class="task-submit" type="button" id="toggle-tasks">Show Tasks</button>
+            </div>
         </div>
+        <div class="task-list" id="task-list" style="display: none;">
+            <h2>Tasks</h2>
+
+            <ul id="task-items">
+        </div>
+<<<<<<< HEAD
         <!-- Task Container -->
         <div class="task-container">
             <button id="tasks-button">Tasks</button>
@@ -57,3 +77,7 @@
     </section>
 </body>
 </html>
+=======
+    </section>
+{% endblock content %}
+>>>>>>> master

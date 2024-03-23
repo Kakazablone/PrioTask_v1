@@ -1,54 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/layout.css') }}">
-
-    {% if title %}
-        <title>PrioTask - {{ title }}</title>
-    {% else %}
-        <title>PrioTask</title>
-    {% endif %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../static/styles/timer.css">
+    <script type="text/javascript" src="../static/scripts/timer.js"></script>
+    <script type="text/javascript" src="../static/scripts/samba.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&family=Madimi+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cambo&family=Khand:wght@300;400;500;600;700&family=Madimi+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+    <title>Priotask</title>
 </head>
-<body>
-  <header>
-    <a class="title" href="/">PrioTask</a>
-      <div class="collapse navbar-collapse" id="navbarToggle">
-        <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-        <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
-        <!-- Navbar Right Side -->
-        <div class="navbar-nav">
-          {% if current_user.is_authenticated %}
-            <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-            <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-          {% else %}
-            <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-            <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-          {% endif %}
+<body data-user-id="{{ user_id }}">
+    <div class="dashboard">
+        <a class="left" href="{{ url_for('home') }}">Home</a>
+        <a class="left" href="{{ url_for('about') }}">About</a>
+        {% if current_user.is_authenticated %}
+        <a class="right" href="{{ url_for('account') }}">Account</a>
+        <div class="dropdown right">
+         
+          <button class="dropdown-btn" id="custom_btn">Customize <span class="arrow"></span></button>          
+          <form class="dropdown-content" id="customTimerForm">
+            
+            <div class="check" id="customTimersContainer">
+               <span id="emoji">🧑‍💻</span><p class="focus">Focus Level</p>
+            <!-- Custom timers will be appended here dynamically -->
         </div>
-      </div>
+            <div class="check">
+              <label for=""><input type="radio" name="time-option" value="Custom" checked> Custom <span class="default">
+                <label for="user_id" id="user_id" style="display: none;" data-id="{{ current_user.id }}">{{ current_user.id }}</label>
+                <label for="name">Name: <br><input type="text" id="name" name="name"></label><br>
+                <label for="pomodoro_value">Pomodoro<input type="number" class="range-input" id="pomodoro_value" min="10" max="60" step="1" value="25" name="pomodoro_value"></label>
+                <label for="short_value">Short Break<input type="number" class="range-input" id="short_value" min="5" max="60" step="1" value="5" name="short_value"></label>
+                <label for="long_value">Long Break<input type="number" class="range-input" id="long_value" min="5" max="60" step="1" value="15" name="long_value"></label>
+                <label for="saveCustom"><input type="submit" value="Save" id="saveCustom"></label>
+            </label>
+          </form>         
+          </div>
+        </div>
+        <a class="right" href="{{ url_for('logout') }}">Logout</a>        
+        {% else %}
+        <a class="right" href="{{ url_for('login') }}">Login</a>
+        <a class="right" href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </div>
   </header>
-    <main role="main" class="container">
+    <audio id="alarmBeforeSound" preload="auto" src="../static/audio/mixkit-warning-alarm-buzzer-991.wav"></audio>
+    <audio id="alarmAtZeroSound" preload="auto" src="../static/audio/mixkit-rooster-crowing-in-the-morning-2462.wav"></audio>
+    <main role="main" class="alert-container">
       <div class="row">
         <div class="col-md-8">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
+                <div class="alert">
+                  <div id="success-message" style="display: none;">Task added successfully!</div>
                   {{ message }}
                 </div>
               {% endfor %}
             {% endif %}
           {% endwith %}
-          {% block content %}{% endblock %}
         </div>
       </div>
-    </main>
+    </main>   
+    {% block content %}{% endblock %}
 
-
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Edit Task</h2>
+          <div id="edit-message" style="display: none; color: red;"></div>
+          <textarea id="editedContent" rows="2" cols="50"></textarea>
+          <button class="task-submit" id="updateButton">Update</button>
+      </div>
+    </div>
+    <div id="scheduleModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Schedule Task</h2>
+        <label for="taskDate">Date:</label>
+        <input type="text" id="taskDate" name="taskDate">
+        <label for="taskTime">Time:</label>
+        <input type="text" id="taskTime" name="taskTime">
+        <button class="task-submit" id="scheduleButton">Schedule</button>
+      </div>
+    </div>  
+  
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 </body>

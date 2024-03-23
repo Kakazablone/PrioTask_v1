@@ -14,6 +14,7 @@ app.register_blueprint(app_views)
 # cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
+
 @app.teardown_appcontext
 def close_db(error):
     """ Close Storage """
@@ -30,6 +31,7 @@ def not_found(error):
     """
     return make_response(jsonify({'error': "Not found"}), 404)
 
+
 app.config['SWAGGER'] = {
     'title': 'PrioTask v1',
     'uiversion': 3
@@ -45,5 +47,5 @@ if __name__ == "__main__":
     if not host:
         host = '0.0.0.0'
     if not port:
-        port = '5000'
+        port = '5001'
     app.run(host=host, port=port, threaded=True)

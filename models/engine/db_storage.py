@@ -7,11 +7,13 @@ import models
 from models.base_model import BaseModel, Base
 from models.task import Task
 from models.user import User
+from models.custom import Custom
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+import logging
 
-classes = {"User": User, "Task": Task, "BaseModel": BaseModel}
+classes = {"User": User, "Task": Task, "Custom": Custom}
 
 
 class DBStorage:
@@ -52,6 +54,7 @@ class DBStorage:
     def save(self):
         """commit all changes of the current database session"""
         self.__session.commit()
+  
 
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
@@ -98,3 +101,16 @@ class DBStorage:
             count = len(models.storage.all(cls).values())
 
         return count
+
+    def get_user_objects(self, user_id, obj_type):
+        """
+        Retrieves a dictionary of objects of a specified
+        type associated with the user,
+        where keys are object IDs.
+        """
+        user_obj_dict = {}
+        objects = self.__session.query(obj_type).\
+            filter(obj_type.user_id == user_id).all()
+        for obj in objects:
+            user_obj_dict[obj.id] = obj.to_dict()
+        return user_obj_dict

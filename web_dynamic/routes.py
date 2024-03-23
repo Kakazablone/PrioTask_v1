@@ -3,12 +3,13 @@
 from models import storage
 from models.task import Task
 from models.user import User
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt, check_password_hash
 from flask_login import LoginManager
 from PIL import Image
-from web_dynamic.forms import LoginForm, RegistrationForm, UpdateAccountForm
+from web_dynamic.forms import LoginForm, RegistrationForm
+from web_dynamic.forms import UpdateAccountForm, TaskForm
 import os
 import secrets
 import uuid
@@ -37,12 +38,15 @@ def load_user(user_id):
         return user
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
+@login_required
 def home():
     """The root endpoint, main section of the priotask
     web application
     """
-    return render_template('layout.html')
+    user_id = current_user.id
+    form = TaskForm()
+    return render_template('timer.html', form=form, user_id=user_id)
 
 
 @app.route("/about")
@@ -161,3 +165,6 @@ def account():
                          filename='images/' + current_user.image_file)
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
+
+
+

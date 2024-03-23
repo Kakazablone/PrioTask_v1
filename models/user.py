@@ -7,6 +7,7 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
+
 class User(BaseModel, UserMixin, Base):
     """Representation of a user """
     if models.storage_t == 'db':
@@ -16,14 +17,14 @@ class User(BaseModel, UserMixin, Base):
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
-        image_file = Column(String(20), nullable=False, default='default.jpg')
-        tasks = relationship("Task", backref="user", cascade="all, delete-orphan")
+        image_file = Column(String(20), nullable=False,
+                            default='default.jpg')
+        tasks = relationship("Task", backref="user",
+                             cascade="all, delete-orphan")
     else:
         username = ""
         email = ""
         password = ""
         first_name = ""
         last_name = ""
-
-
-
+        image_file = "default.jpg"
