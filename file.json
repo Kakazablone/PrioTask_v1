@@ -84,6 +84,17 @@
         "id": "d2d36059-bc16-42c2-93dd-ba539217af1b",
         "__class__": "Task"
     },
+    "Custom.b5bd57c1-3bff-4c4e-8a12-4731ce75e05d": {
+        "user_id": "c45f212c-3966-4e8b-b00c-da81ea4166f7",
+        "name": "killin myself",
+        "pomodoro_value": 28,
+        "short_value": 6,
+        "long_value": 15,
+        "created_at": "2024-03-22T11:23:24.240239",
+        "updated_at": "2024-03-22T11:23:24.240334",
+        "id": "b5bd57c1-3bff-4c4e-8a12-4731ce75e05d",
+        "__class__": "Custom"
+    },
     "Task.71b4f9d0-554d-447e-82ce-ec992c2a4fcc": {
         "user_id": "c45f212c-3966-4e8b-b00c-da81ea4166f7",
         "content": "user",
@@ -91,6 +102,17 @@
         "updated_at": "2024-03-22T11:28:03.302794",
         "id": "71b4f9d0-554d-447e-82ce-ec992c2a4fcc",
         "__class__": "Task"
+    },
+    "Custom.0aa85e50-d0be-416a-8062-3bbb2f4445c6": {
+        "user_id": "c45f212c-3966-4e8b-b00c-da81ea4166f7",
+        "name": "mine",
+        "pomodoro_value": 25,
+        "short_value": 5,
+        "long_value": 15,
+        "created_at": "2024-03-22T11:28:14.482722",
+        "updated_at": "2024-03-22T11:28:14.482756",
+        "id": "0aa85e50-d0be-416a-8062-3bbb2f4445c6",
+        "__class__": "Custom"
     },
     "Task.913d5a25-fe47-42f5-93d3-6bf239b0096c": {
         "user_id": "c45f212c-3966-4e8b-b00c-da81ea4166f7",
@@ -155,5 +177,16 @@
         "updated_at": "2024-03-22T11:43:00.146902",
         "id": "e0846c4e-18bf-4d3a-ba7d-32a5b4c55d11",
         "__class__": "Task"
+    },
+    "Custom.e76650d3-988e-4a83-bff5-1989d1ef4ff0": {
+        "user_id": "c9a6bff7-2384-4269-9535-45a9c8e3f23d",
+        "name": "okay",
+        "pomodoro_value": 29,
+        "short_value": 7,
+        "long_value": 17,
+        "created_at": "2024-03-22T14:59:07.013493",
+        "updated_at": "2024-03-22T14:59:07.013539",
+        "id": "e76650d3-988e-4a83-bff5-1989d1ef4ff0",
+        "__class__": "Custom"
     }
 }
