@@ -57,10 +57,23 @@ $(document).ready(function () {
     stopTimer();
     timerRunning = false;
   });
+
   $(".dropdown-btn").click(function () {
-    $(this).next(".dropdown-content").toggle();
+    $(this).next(".dropdown-content").fadeIn('slow');
 
     let user_id = $("#user_id").data("id");
+    let $toggleTasksButton = $('#toggle-tasks');
+
+
+    if ($toggleTasksButton.text() === 'Hide Tasks') {
+      // Hide the task list
+      $('#task-list').fadeOut('slow');
+      
+      // Switch toggle tasks button back to "Show Tasks"
+      $toggleTasksButton.text('Show Tasks');
+
+    }
+
 
     // Check if data has already been loaded, if not, make AJAX request to fetch custom data
     if (!dataLoaded) {
@@ -279,7 +292,7 @@ $(document).ready(function () {
   );
   $(document).on("click", function (event) {
     if (!$(event.target).closest(".dropdown").length) {
-      $(".dropdown-content").hide();
+      $(".dropdown-content").fadeOut('slow');
     }
   });
 });
@@ -313,21 +326,38 @@ function stopTimer() {
 function updateTimer() {
   // Update timer countdown
   if (secondsRemaining > 0) {
-    secondsRemaining--;
+      secondsRemaining--;
   } else {
-    if (minutesRemaining > 0) {
-      minutesRemaining--;
-      secondsRemaining = 59;
-    } else {
-      // Timer has reached 0
-      clearInterval(timerInterval);
-      timerRunning = false;
-      resetTimer();
-      return;
-    }
+      if (minutesRemaining > 0) {
+          minutesRemaining--;
+          secondsRemaining = 59;
+      } else {
+          // Timer has reached 00:00
+          clearInterval(timerInterval);
+          timerRunning = false;
+          resetTimer();
+          // Play the alarm sound when it's 8 seconds before reaching 00:00
+          if (secondsRemaining === 8) {
+              playAlarmBefore();
+          }
+          // Play another alarm sound at exactly 00:00
+          if (secondsRemaining === 0) {
+              playAlarmAtZero();
+          }
+          return;
+      }
   }
   updateDisplay(minutesRemaining, secondsRemaining);
 }
+
+function playAlarmBefore() {
+  $('#alarmBeforeSound')[0].play();
+}
+
+function playAlarmAtZero() {
+  $('#alarmAtZeroSound')[0].play();
+}
+
 
 function resetTimer() {
   // Reset timer to initial value
