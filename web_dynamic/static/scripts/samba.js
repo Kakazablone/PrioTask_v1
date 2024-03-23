@@ -98,7 +98,7 @@ $(document).ready(function () {
         const userId = $("body").data("user-id");
         const content = $("#editedContent").val();
         if (!content.trim()) {
-            alert("Field cannot be blank");
+            $('#edit-message').text('Task field cannot be blank').fadeIn().delay(3000).fadeOut();;
             return;
         }
     
