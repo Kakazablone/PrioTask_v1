@@ -1,4 +1,4 @@
-# PRIOTASK \*productive focus
+# PRIOTASK *productive focus*
 
 ## Intoduction
 
@@ -25,7 +25,12 @@ This project is our Portfolio Project, concluding our Foundations Year at ALX Af
 
 ---
 
-Meet our talented team of Software Engineers - Zablon Samba [@Kakazablone] - Maureen Rotich [@maureen_chepr] - Metrine Makana [@makanametrine]
+Meet our talented team of Software Engineers 
+
+    - Zablon Samba [@Kakazablone](https://twitter.com/Kakazablone)
+    - Maureen Rotich [@maureen_chepr](https://twitter.com/maureen_chepr)
+    -Metrine Makana [@makanametrine](https://twitter.com/makanametrine)
+
 Follow us on X for more tech related awesomeness
 
 ---
