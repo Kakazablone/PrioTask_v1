@@ -25,13 +25,14 @@ This project is our Portfolio Project, concluding our Foundations Year at ALX Af
 
 ---
 
-Meet our talented team of Software Engineers 
+Meet our talented team of Software Engineers
 
-    * Zablon Samba [@Kakazablone](https://twitter.com/Kakazablone)    
-    * Maureen Rotich [@maureen_chepr](https://twitter.com/maureen_chepr)
-    * Metrine Makana [@makanametrine](https://twitter.com/makanametrine)
+* Zablon Samba [@Kakazablone](https://twitter.com/Kakazablone)
+* Maureen Rotich [@maureen_chepr](https://twitter.com/maureen_chepr)
+* Metrine Makana [@makanametrine](https://twitter.com/makanametrine)
 
-Follow us on X for more tech related awesomeness
+Follow us on [X](https://twitter.com/X) for more tech-related awesomeness
+
 
 ---
 
