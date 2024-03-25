@@ -42,7 +42,7 @@ Cick the link to take a tour of [Priotask]()
 
 Here is a preview of the interface
 
-[priotask](/home/met/PrioTask_v1/web_dynamic/static/images/priotask.png)
+![priotask](/home/met/PrioTask_v1/web_dynamic/static/images/priotask.png)
 
 ___
 ## Priotask on CLI
