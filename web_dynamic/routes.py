@@ -39,14 +39,16 @@ def load_user(user_id):
 
 
 @app.route("/", methods=['GET', 'POST'])
-@login_required
+
 def home():
     """The root endpoint, main section of the priotask
     web application
     """
-    user_id = current_user.id
-    form = TaskForm()
-    return render_template('timer.html', form=form, user_id=user_id)
+    if current_user.is_authenticated:
+        user_id = current_user.id
+        form = TaskForm() 
+        return render_template('timer.html', form=form, user_id=user_id)
+    return render_template('landing.html')
 
 
 @app.route("/about")
@@ -116,7 +118,19 @@ def logout():
     on the web application
     """
     logout_user()
-    return redirect(url_for('home'))
+    return redirect(url_for('home_'))
+
+
+@app.route("/home")
+@login_required
+def home_():
+    """
+    Logs out a user from an ongoing session
+    on the web application
+    """
+    
+    logout_user()
+    return redirect(url_for('timer.html'))
 
 
 def save_picture(form_picture):

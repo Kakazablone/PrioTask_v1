@@ -105,5 +105,16 @@
         "updated_at": "2024-03-25T07:08:30.629143",
         "id": "2c30a4cc-7dac-4f6c-9234-d4c75a1cf608",
         "__class__": "Custom"
+    },
+    "User.99bcdda8-8f51-4ad3-9103-daab2f22ca02": {
+        "username": "power",
+        "first_name": "power",
+        "last_name": "house",
+        "email": "powerhouse@gmail.com",
+        "password": "$2b$12$7khzVDTIZaZ3VG6OSnmgAe0Ywt3nzyJ6JdolslHrOcS44TwLFZ45G",
+        "created_at": "2024-03-26T20:36:01.382626",
+        "updated_at": "2024-03-26T20:36:01.382637",
+        "id": "99bcdda8-8f51-4ad3-9103-daab2f22ca02",
+        "__class__": "User"
     }
 }
