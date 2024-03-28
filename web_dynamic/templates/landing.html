@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/landing.css" type="text/css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <title>Priotask</title>
+</head>
+<body>
+    <nav>
+        <div class="navbar">
+            <a href="#features">Features</a>
+            <a href="#about_info">About</a>
+            <a href="#teams">Our Team</a>
+        </div>
+        <div class="nav_cta">
+            <a href="" >Join Us</a>
+        </div>       
+
+    </nav>
+    <section class="header_section">
+        <div class="header_img">
+            <img src="{{ url_for('static', filename='images/focus1.jpg') }}" alt="">
+        </div>
+        <div class="header">
+            <h2>Priotask</h2>
+            <p>Do More, Focus More</p>
+            <p>It All Happens Here</p>
+            <a href="#footer" class="cta">Get Started</a>
+        </div>
+    </section>
+    <section class="benefits_section" id="features">
+        <div class="benefits">  
+            
+            <h3 >What You Get</h3>
+            <ul>
+                <li>Manage your tasks with ease</li>
+                <li>Set priorities for your tasks</li>
+                <li>Customize your work and rest time</li>
+                <li>Get notifications when time is up</li>
+                <li>Get personalised account section</li>
+
+            </ul> 
+        </div>           
+        <div class="benefits_img">
+        <img src="{{ url_for('static', filename='images/priotaskv1.png') }}" alt="">          
+                  
+        </div>
+    </section>
+    <section class="about_section" id="about_info">
+        <div class="about">
+            <div class="about_priotask" >
+                <p id="p1">Priotask aims at assisting individuals & groups, where necessary, manage their time well and at the same time being able to increase or improve their productivity.</p>
+                <p id="p2">Priotask is your FOCUS partner - Follow One Course Until Successful" and is a popular phrase that emphasizes the importance of staying committed to a single goal or objective until it is achieved.</p>
+            </div>
+            <h3 id="teams">Our Team</h3>
+            <div class="about_team">
+                
+                <div class="metrine">
+                    <div class="profile_pic">
+                        <img src="{{ url_for('static', filename='images/met.jpg') }}" alt="" id="met">
+                    </div>
+                    <div class="content">
+                        <h3>Metrine Makana</h3>
+                        <p>Lead FrontEnd Developer</p>
+                    </div>
+                    <div class="socials">
+                        <a href="www.linkedin.com/in/metrine-makana"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
+                        <a href="https://github.com/Metrinenaliaka"><img src="{{ url_for('static', filename='images/github.jpg') }}" alt="github logo"></a>
+                        <a href="https://twitter.com/makanametrine"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x logo"></a>
+                    </div>               
+                </div>
+                <div class="samba">
+                    <div class="profile_pic">
+                        <img alt="" id="zabu" src="{{ url_for('static', filename='images/zabu.jpg') }}">
+                    </div>
+                    <div class="content">
+                        <h3>Zablon Samba</h3>
+                        <p>Lead BackEnd Developer/DevOps</p>
+                    </div>
+                    <div class="socials">
+                        <a href="https://www.linkedin.com/in/zablon-samba/"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
+                        <a href="https://github.com/Kakazablone"><img src="{{ url_for('static', filename='images/github.jpg') }}" alt="github logo"></a>
+                        <a href="https://twitter.com/Kakazablone"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x logo"></a>
+                    </div>               
+                </div>
+                <div class="maureen">
+                    <div class="profile_pic">
+                        <img alt="" id="moh" src="{{ url_for('static', filename='images/moh.jpeg') }}">
+                    </div>
+                    <div class="content">
+                        <h3>Maureen Rotich</h3>
+                        <p>Lead Application Testing</p>
+                    </div>
+                    <div class="socials">
+                        <a href="#"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
+                        <a href="https://github.com/maureen-chepr"><img src="{{ url_for('static', filename='images/github.jpg') }}" alt="github logo"></a>
+                        <a href="https://twitter.com/maureen_chepr"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x logo"></a>
+                    </div>               
+                </div>
+            </div>
+            <div class="cta">
+                <a href="#footer">Get Started</a>
+            </div>
+        </div>
+    </section>
+    <section class="final_cta">
+        <div class="footer" id="footer"> 
+            <div class="f_tag">
+                <p>Start managing your tasks with ease</p>
+            </div>
+            <div class="f_cta">
+                <a href="{{ url_for('register') }}">SignUp</a>
+                <a href="{{ url_for('login') }}">Login</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
