@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles/landing.css" type="text/css">
-    
+    <link rel="stylesheet" href="../static/styles/landing.css" type="text/css">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -23,9 +22,20 @@
     <title>Priotask</title>
 </head>
 <body>
+    <nav>
+        <div class="navbar">
+            <a href="#features">Features</a>
+            <a href="#about_info">About</a>
+            <a href="#teams">Our Team</a>
+        </div>
+        <div class="nav_cta">
+            <a href="" >Join Us</a>
+        </div>       
+
+    </nav>
     <section class="header_section">
         <div class="header_img">
-            <img src="" alt="">
+            <img src="{{ url_for('static', filename='images/focus1.jpg') }}" alt="">
         </div>
         <div class="header">
             <h2>Priotask</h2>
@@ -34,10 +44,10 @@
             <a href="#footer" class="cta">Get Started</a>
         </div>
     </section>
-    <section class="benefits_section">
+    <section class="benefits_section" id="features">
         <div class="benefits">  
             
-            <h3>What You Get</h3>
+            <h3 >What You Get</h3>
             <ul>
                 <li>Manage your tasks with ease</li>
                 <li>Set priorities for your tasks</li>
@@ -48,59 +58,59 @@
             </ul> 
         </div>           
         <div class="benefits_img">
-        <img src="{{ url_for('images', filename='priotaskv1.png') }}" alt="">          
+        <img src="{{ url_for('static', filename='images/priotaskv1.png') }}" alt="">          
                   
         </div>
     </section>
-    <section class="about_section">
+    <section class="about_section" id="about_info">
         <div class="about">
-            <div class="about_priotask">
-                <p>Priotask aims at assisting individuals & groups, where necessary, manage their time well and at the same time being able to increase or improve their productivity.</p>
-                <p>Priotask is your FOCUS partner - Follow One Course Until Successful" and is a popular phrase that emphasizes the importance of staying committed to a single goal or objective until it is achieved.</p>
+            <div class="about_priotask" >
+                <p id="p1">Priotask aims at assisting individuals & groups, where necessary, manage their time well and at the same time being able to increase or improve their productivity.</p>
+                <p id="p2">Priotask is your FOCUS partner - Follow One Course Until Successful" and is a popular phrase that emphasizes the importance of staying committed to a single goal or objective until it is achieved.</p>
             </div>
-            <h3>Our Team</h3>
+            <h3 id="teams">Our Team</h3>
             <div class="about_team">
                 
                 <div class="metrine">
                     <div class="profile_pic">
-                        <img alt="" id="met">
+                        <img src="{{ url_for('static', filename='images/met.jpg') }}" alt="" id="met">
                     </div>
                     <div class="content">
                         <h3>Metrine Makana</h3>
                         <p>Lead FrontEnd Developer</p>
                     </div>
                     <div class="socials">
-                        <a href="www.linkedin.com/in/metrine-makana"><img src="/web_dynamic/static/images/linkedin.png" alt="linkedin logo"></a>
-                        <a href="https://github.com/Metrinenaliaka"><img src="/web_dynamic/static/images/github.jpg" alt="github logo"></a>
-                        <a href="https://twitter.com/makanametrine"><img src="/web_dynamic/static/images/x.png" alt="x logo"></a>
+                        <a href="www.linkedin.com/in/metrine-makana"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
+                        <a href="https://github.com/Metrinenaliaka"><img src="{{ url_for('static', filename='images/github.jpg') }}" alt="github logo"></a>
+                        <a href="https://twitter.com/makanametrine"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x logo"></a>
                     </div>               
                 </div>
                 <div class="samba">
                     <div class="profile_pic">
-                        <img alt="" id="zabu">
+                        <img alt="" id="zabu" src="{{ url_for('static', filename='images/zabu.jpg') }}">
                     </div>
                     <div class="content">
                         <h3>Zablon Samba</h3>
                         <p>Lead BackEnd Developer/DevOps</p>
                     </div>
                     <div class="socials">
-                        <a href="https://www.linkedin.com/in/zablon-samba/"><img src="/web_dynamic/static/images/linkedin.png" alt="linkedin logo"></a>
-                        <a href="https://github.com/Kakazablone"><img src="/web_dynamic/static/images/github.jpg" alt="github logo"></a>
-                        <a href="https://twitter.com/Kakazablone"><img src="/web_dynamic/static/images/x.png" alt="x logo"></a>
+                        <a href="https://www.linkedin.com/in/zablon-samba/"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
+                        <a href="https://github.com/Kakazablone"><img src="{{ url_for('static', filename='images/github.jpg') }}" alt="github logo"></a>
+                        <a href="https://twitter.com/Kakazablone"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x logo"></a>
                     </div>               
                 </div>
                 <div class="maureen">
                     <div class="profile_pic">
-                        <img alt="" id="moh">
+                        <img alt="" id="moh" src="{{ url_for('static', filename='images/moh.jpeg') }}">
                     </div>
                     <div class="content">
                         <h3>Maureen Rotich</h3>
                         <p>Lead Application Testing</p>
                     </div>
                     <div class="socials">
-                        <a href="#"><img src="/web_dynamic/static/images/linkedin.png" alt="linkedin logo"></a>
-                        <a href="https://github.com/maureen-chepr"><img src="/web_dynamic/static/images/github.jpg" alt="github logo"></a>
-                        <a href="https://twitter.com/maureen_chepr"><img src="/web_dynamic/static/images/x.png" alt="x logo"></a>
+                        <a href="#"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
+                        <a href="https://github.com/maureen-chepr"><img src="{{ url_for('static', filename='images/github.jpg') }}" alt="github logo"></a>
+                        <a href="https://twitter.com/maureen_chepr"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x logo"></a>
                     </div>               
                 </div>
             </div>

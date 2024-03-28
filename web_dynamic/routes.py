@@ -51,15 +51,6 @@ def home():
     return render_template('landing.html')
 
 
-@app.route("/about")
-def about():
-    """This route gives a glimpse of what the entire
-    web application is about & higlights some info
-    about our team
-    """
-    return render_template('about.html')
-
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     """This route provides the gateway for a user to register
