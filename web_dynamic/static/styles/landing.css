@@ -17,23 +17,25 @@ body{
     flex-flow: column wrap;
     max-width: 100vw;
     margin: 0;
+    box-sizing: border-box;
     
 }
 h2{
     font-family: playfair display;
-    font-size: 50px;
+    font-size: 100px;
     margin: 0;
 }
 nav{
     display: flex;
-    width: 100vw;
+    align-items: center;
+    max-width: 100vw;
     height: auto;
     background-color: var(--color-secondary);
     font-size: 18px;
-    padding: 10px;
-    /* position: fixed; */
+    padding: 10px 0;
     position: sticky;
     top: 0;
+    z-index: 1000;
     
 }
 nav a{
@@ -58,7 +60,6 @@ nav a:hover{
     color: black;
 }
 .nav_cta{
-    display: inline-block;
     text-align: center;
     width: 30%;
       
@@ -67,14 +68,14 @@ nav a:hover{
 .navbar{
     display: flex;
     width: 70%;
-    /* margin-left: 5%; */
     justify-content: space-around;
 }
 .header p{
     font-family: lora;
-    font-size: 18px;
+    font-size: 26px;
     margin: 0;
-    margin-left: 60px;
+    margin-left: 25%;
+    padding-bottom: 10px;
 }
 .about p{
     font-family: ubuntu;
@@ -82,10 +83,13 @@ nav a:hover{
 
 }
 
-h3{
+.about_section h3{
+    width: 100%;
+    padding: 5px 0;
     font-family: playfair display;
     font-size: 30px;
     margin: 0;
+    text-align: center;
 }
 .header a{
     text-decoration: none;
@@ -99,16 +103,16 @@ h3{
     color: white;
 }
 .header .cta{
-    margin-left: 250px; 
+    margin-left: 50%; 
     font-family: rubik;
     font-weight: 500; 
-    color: dodgerblue;      
+    color: dodgerblue;    
 }
 .header_section, .about_section{
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0;
     background-color: var(--color-primary);
     color: var(--color-font);  
     width: 100%;
@@ -117,32 +121,34 @@ h3{
     justify-content: space-around;
 }
 .header_img{
-    width: 30%;
-    height: 100%;
+    width: 100%;
+    height: 300px;
     margin-right: 0;
-    
-    /* background-color: white; */
+    position: relative;
 }
 .header_img img{
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
     opacity: 1;
     transition: opacity 0.5s ease;
-    /* filter: brightness(200%); */
     
 }
 .header{
-    padding: 20px;
-    
+    width: 70%;
+    height: auto;
+    padding-left: 0px;
+    position: absolute;
+    top: 50%; 
+    left: 60%; 
+    transform: translate(-50%, -50%); /*Center the header div*/
+    color: white; 
 }
-/* .benefits_section{
-    height: fit-content;
-} */
+
 .benefits_section, .footer{
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 2rem 0;
     background-color: var(--color-font);  
     width: 100%;
     height: auto;  
@@ -168,14 +174,16 @@ li{
     font-size: 20px;
 }
 .benefits_img{
+    display: flex;
+    justify-content: center;
     width: 50%;
     height: auto; 
-    margin-left: 50px;  
+    margin-left: 20px;  
     
 }
 .benefits_img img{
-    width: 500px;
-    height: 300px;
+    width: 650px;
+    height: 400px;
 }
 .about{
     width: 100%;
@@ -184,8 +192,6 @@ li{
 .about_priotask{
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-       
 }
 #p1{
     display: block;
@@ -198,7 +204,6 @@ li{
     margin-left: 20%;
 }
 #p2{
-    /* display: block; */
     background-color: rgba(30, 143, 255, 0.397);
     padding: 30px;
     border-radius: 20px;
@@ -263,27 +268,28 @@ li{
     height: 120px;
     border-radius: 50%;   
 }
-/* .samba{
-    width: 100px;
-} */
+
 .metrine, .maureen, .samba{
     display: flex;
     flex-flow: column;
     width: 250px;
-    height: auto;
+    height: 300px;
     justify-content: center;
     align-items: center;
     text-align: center;
     margin-bottom: 20px;
     padding: 10px;
+    border: 1px solid lightyellow;
+    border-radius: 25px 0;
 }
 
 .f_tag{
     flex-grow: 1;
     margin-left: 10%;
     font-size: 40px;
-    animation: blink 1s infinite;
+    animation: blink 5s infinite;
     color: orange;
+    font-family: playfair display;
 }
 .f_cta{
     margin-right: 30%;
@@ -293,7 +299,7 @@ li{
 .f_cta a{
     text-decoration: none;
     background-color: dodgerblue;
-    padding: 10px 15px;
+    padding: 15px 20px;
     border-color: var(--color-secondary);
     border-radius: 0 7px 0 7px;
     font-size: 20px;
@@ -309,15 +315,17 @@ li{
 
 }
 .socials{
+    width: 50%;
+    height: 30px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-start;
-    /* margin: 10px 0; */
+    justify-content: center;
 
 }
 .socials img{
     width: 20px;
     height: 20px;
+    padding: 5px;
     margin-right: 5px;
     border-radius: 50%;
     cursor: pointer;

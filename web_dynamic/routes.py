@@ -119,9 +119,7 @@ def home_():
     Logs out a user from an ongoing session
     on the web application
     """
-    
-    logout_user()
-    return redirect(url_for('timer.html'))
+    return render_template('timer.html')
 
 
 def save_picture(form_picture):
