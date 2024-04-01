@@ -43,7 +43,7 @@ Cick the link to take a tour of [Priotask]()
 
 Here is a preview of the interface
 
-![priotask](/home/met/PrioTask_v1/web_dynamic/static/images/priotask.png)
+![priotask](https://imgur.com/a/nHRvORF)
 
 ___
 ## Priotask on CLI
@@ -59,9 +59,11 @@ ___
 3. On separate terminals run
 
 `python3 -m web_dynamic.priotask`
+
 `python3 -m api.v1.app`
 
 4. You can use *curl* to do the http methods on the terminal or click the link to open then in a browser
+    example a get request `curl -X DELETE http://0.0.0.0:5001/api/v1/users` get's all the users in the database
 
 ___
 ## Features

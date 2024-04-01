@@ -75,7 +75,7 @@ $(document).ready(function () {
     // Check if data has already been loaded, if not, make AJAX request to fetch custom data
     if (!dataLoaded) {
       $.ajax({
-        url: "http://127.0.0.1:5001/api/v1/users/" + user_id + "/custom",
+        url: "/api/v1/users/" + user_id + "/custom",
         type: "GET",
         dataType: "json",
         success: function (customData) {
@@ -148,7 +148,7 @@ $(document).ready(function () {
     $.ajax({
       type: "DELETE",
       url:
-        "http://127.0.0.1:5001/api/v1/users/" + user_id + "/custom/" + customId,
+        "/api/v1/users/" + user_id + "/custom/" + customId,
       success: function (response) {
         // Handle success response
         console.log("Custom timer deleted successfully:", response);
@@ -179,7 +179,7 @@ $(document).ready(function () {
     // Send POST request to save custom
     $.ajax({
       type: "POST",
-      url: "http://127.0.0.1:5001/api/v1/users/" + user_id + "/custom",
+      url: "/api/v1/users/" + user_id + "/custom",
       data: JSON.stringify(formData),
       contentType: "application/json",
       success: function (response) {
@@ -193,7 +193,7 @@ $(document).ready(function () {
         $.ajax({
           type: "GET",
           url:
-            "http://127.0.0.1:5001/api/v1/users/" +
+            "/api/v1/users/" +
             user_id +
             "/custom/" +
             custom_id,
@@ -255,7 +255,7 @@ $(document).ready(function () {
               $.ajax({
                 type: "DELETE",
                 url:
-                  "http://127.0.0.1:5001/api/v1/users/" +
+                  "/api/v1/users/" +
                   user_id +
                   "/custom/" +
                   customId,
