@@ -175,6 +175,86 @@ section {
   color: var(--color-font);
 }
 
+<<<<<<< HEAD
+.task-container {
+  background-color: white; /* Set background color to white */
+  padding: 20px; /* Add padding for spacing */
+  width: 100%; /* Set width to fill the entire width of the page */
+  position: fixed; /* Position the container fixed at the bottom */
+  bottom: 70px; /* Align the container above the controls section */
+  left: 0; /* Align the container to the left edge of the page */
+}
+
+.controls {
+  margin-bottom: 300px; /* Add margin below the controls section */
+}
+
+@media (min-width: 768px) {
+  .task-container {
+    width: 30rem; /* Set a fixed width for larger screens */
+    position: absolute; /* Change position to absolute for larger screens */
+    bottom: 20px; /* Adjust bottom spacing for larger screens */
+    left: 50%; /* Align the container to the center of the page */
+    transform: translateX(-50%); /* Center the container horizontally */
+  }
+}
+
+#tasks-button {
+  background-color: #5a666e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 16px;
+}
+
+.task-management-buttons #add-button,
+.task-management-buttons #edit-button,
+.task-management-buttons #delete-button {
+  margin-right: 5px;
+  border: none; /* Remove default button border */
+  background-color: peachpuff; /* Set background color to peach */
+  color: black; /* Set text color to black */
+  font-size: medium; /* Set font size */
+  border-radius: 10px; /* Add rounded edges */
+  padding: 8px 12px; /* Add padding */
+}
+
+#save-task-button {
+  border: none; /* Remove default button border */
+  background-color: green; /* Set background color to green */
+  color: black; /* Set text color to black */
+  font-size: medium; /* Set font size */
+  border-radius: 10px; /* Add rounded edges */
+  padding: 8px 12px; /* Add padding */
+}
+
+.save-button {
+  border: none; /* Remove default button border */
+  background-color: green; /* Set background color to peach */
+  color: black; /* Set text color to black */
+  font-size: medium; /* Set font size */
+  border-radius: 10px; /* Add rounded edges */
+  padding: 8px 12px; /* Add padding */
+}
+
+
+.task-management-buttons button {
+  margin-right: 5px;
+}
+
+#task-input-form {
+  margin-top: 10px;
+}
+
+#task-input-form input[type="text"] {
+  width: 200px;
+}
+
+#task-list {
+  margin-top: 10px;
+=======
 
 .login-content-section {
   display: block;
@@ -650,4 +730,5 @@ input[type="radio"] {
 
 #customTimersContainer {
   font-size: 18px;
+>>>>>>> master
 }
