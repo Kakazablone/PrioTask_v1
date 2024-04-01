@@ -1,5 +1,19 @@
 # PRIOTASK *productive focus*
 
+---
+# Table Of Contents
+___
+1. Introduction
+   - The project
+   - The context
+   - The Team
+2. Usage
+3. Priotask on CLI
+4. Features
+5. License
+6. Credits
+___
+
 ## Intoduction
 
 ---
