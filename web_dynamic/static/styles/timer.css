@@ -20,12 +20,13 @@
   align-content: center;
   height: 6vh;
   align-items: center;
-  font-size: medium;
-  color: var(--color-font);
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .dashboard a {
   text-decoration: none;
+  color: var(--color-font);
 }
 
 .right button {
@@ -377,9 +378,10 @@ legend {
 
 #custom_btn{
   background-color: var(--color-secondary);
-  color: purple;
+  color: white;
   padding: 12px;
-  font-size: 16px;
+  font-size: 24px;
+  font-weight: 500;
   border: none;
   border-radius: 2%;
   cursor: pointer;
