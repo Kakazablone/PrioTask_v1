@@ -43,7 +43,7 @@ Cick the link to take a tour of [Priotask]()
 
 Here is a preview of the interface
 
-![priotask](https://imgur.com/rQ4bDmC)
+![priotask](https://i.imgur.com/rQ4bDmC.png)
 
 ___
 ## Priotask on CLI
