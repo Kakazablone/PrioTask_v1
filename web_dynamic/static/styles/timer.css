@@ -731,6 +731,9 @@ input[type="radio"] {
   .account-content-sction form {
     width: 80%;
   }
+  .dropdown-content {
+    width: 60%;
+  }
 }
 
 
@@ -773,5 +776,8 @@ input[type="radio"] {
   }
   .account-content-sction form {
     width: 80%;
+  }
+  .dropdown-content {
+    width: 30%;
   }
 }
