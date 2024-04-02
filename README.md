@@ -77,7 +77,7 @@ ___
 `python3 -m api.v1.app`
 
 4. You can use *curl* to do the http methods on the terminal or click the link to open then in a browser
-    example a get request `curl -X DELETE http://0.0.0.0:5001/api/v1/users` get's all the users in the database
+    example a get request `curl -X GET http://0.0.0.0:5001/api/v1/users` get's all the users in the database
 
 ___
 ## Features
