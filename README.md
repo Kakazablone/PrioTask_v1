@@ -53,7 +53,7 @@ Follow us on [X](https://twitter.com/X) for more tech-related awesomeness
 # Usage
 
 ---
-Cick the link to take a tour of [Priotask]()
+Cick the link to take a tour of [Priotask](https://priotask.alxbnb.tech/)
 
 Here is a preview of the interface
 
