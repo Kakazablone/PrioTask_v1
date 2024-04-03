@@ -56,8 +56,8 @@
         {% endif %}
     </div>
   </header>
-    <audio id="alarmBeforeSound" preload="auto" src="../static/audio/mixkit-warning-alarm-buzzer-991.wav"></audio>
-    <audio id="alarmAtZeroSound" preload="auto" src="../static/audio/mixkit-rooster-crowing-in-the-morning-2462.wav"></audio>
+    <audio id="alarmBeforeSound" preload="auto" src="{{ url_for('static', filename='audio/mixkit-warning-alarm-buzzer-991.wav') }}"></audio>
+    <audio id="alarmAtZeroSound" preload="auto" src="{{ url_for('static', filename='audio/mixkit-rooster-crowing-in-the-morning-2462.wav') }}"></audio>
     <main role="main" class="alert-container">
       <div class="row">
         <div class="col-md-8">

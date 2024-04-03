@@ -58,7 +58,11 @@
             </ul> 
         </div>           
         <div class="benefits_img">
-        <img src="{{ url_for('static', filename='images/priotaskv1.png') }}" alt="">          
+            <video controls>
+                <source src="{{ url_for('static', filename='videos/Priotask Web Application.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- <img src="{{ url_for('static', filename='images/priotaskv1.png') }}" alt="">           -->
                   
         </div>
     </section>
@@ -94,7 +98,7 @@
                         <p>Lead BackEnd Developer/DevOps</p>
                     </div>
                     <div class="socials">
-                        <a href="https://www.linkedin.com/in/zablon-samba/"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
+                        <a href="https://www.linkedin.com/in/zablon-samba/" target="_blank"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="linkedin logo"></a>
                         <a href="https://github.com/Kakazablone"><img src="{{ url_for('static', filename='images/github.jpg') }}" alt="github logo"></a>
                         <a href="https://twitter.com/Kakazablone"><img src="{{ url_for('static', filename='images/x.png') }}" alt="x logo"></a>
                     </div>               

@@ -22,6 +22,7 @@
   align-items: center;
   font-size: 22px;
   font-weight: 500;
+  width: 100vw;
 }
 
 .dashboard a {
@@ -666,7 +667,7 @@ input[type="radio"] {
 }
 
 
-@media only screen and (max-width:320px) {
+@media only screen and (min-width:200px) and (max-width:320px) {
   .login-content-section {
     width: 70%;
     margin: 70% auto;
@@ -714,6 +715,9 @@ input[type="radio"] {
   }
   .container {
     margin: 50%;
+  }
+  .container h1 {
+    width: 100%;
   }
   .account-content-sction{
    width: 75%;
@@ -779,5 +783,32 @@ input[type="radio"] {
   }
   .dropdown-content {
     width: 30%;
+  }
+  .controls {
+    margin-top: 3rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .controls button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--color-font);
+    font-size: 13px;
+    margin: 2px;
+  }
+  #NewTaskButton {
+    margin: 10px;
+    font-size: 16px;
+    width: 100px;
+  }
+  .container .task-submit {
+    width: 60%;
+  }
+  #toggle-tasks {
+    margin: 0px;
+    font-size: 14px;
+    width: 100px;
   }
 }

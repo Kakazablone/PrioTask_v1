@@ -182,9 +182,10 @@ li{
     margin-left: 20px;  
     
 }
-.benefits_img img{
-    width: 450px;
-    height: 300px;
+.benefits_img video {
+    width: 400px;
+    height: 360px;
+    border-radius: 10px;
 }
 .about{
     width: 100%;
@@ -285,17 +286,14 @@ li{
 }
 
 .f_tag{
-    flex-grow: 1;
-    margin-left: 10%;
     font-size: 40px;
     animation: blink 5s infinite;
     color: orange;
     font-family: playfair display;
+    width: 40%;
 }
-.f_cta{
-    margin-right: 30%;
-
-    
+.f_tag p {
+    width: 100%;
 }
 .f_cta a{
     text-decoration: none;
@@ -339,12 +337,12 @@ li{
 
 
 /* Mobile */
-@media only screen and (max-width:320px){
+@media only screen and (min-width:200px) and (max-width:320px){
     nav {
-        font-size: 14px;
+        font-size: 10px;
     }
     .nav_cta a{
-        font-size: 14px;
+        font-size: 8px;
     }
     .header{
         width: 100%;
@@ -352,25 +350,25 @@ li{
         padding-left: 0px;
         position: absolute;
         top: 50%; 
-        left: 55%; 
+        left: 52%; 
         transform: translate(-50%, -50%); /*Center the header div*/
     }
     h2 {
-        font-size: 50px;
+        font-size: 30px;
     }
     .header p{
         font-family: lora;
-        font-size: 20px;
+        font-size: 14px;
         margin: 0;
         margin-left: 25%;
         padding-bottom: 10px;
     }
     .header a{
-        padding: 6px 11px;
-        font-size: 12px;
+        padding: 4px 9px;
+        font-size: 10px;
     }
 
-    .benefits_section, .footer{
+    .benefits_section, .footer {
         align-self: center;
         padding: 1rem 0;  
         width: 80%;
@@ -398,9 +396,10 @@ li{
         margin-left: 0;  
     }
 
-    .benefits_img img{
-        width: 300px;
-        height: 200px;
+    .benefits_img video {
+        width: 200px;
+        height: 150px;
+        border-radius: 10px;
     }
     
     .about{
@@ -424,10 +423,10 @@ li{
         font-size: 30px;
     }
     .f_cta{
-        margin-right: 0;  
+        margin-right: 0;
     }
     .f_cta a{
-        font-size: 16px;   
+        font-size: 16px; 
     }
     #footer {
         width: 100%;
@@ -446,12 +445,12 @@ li{
         font-size: 18px;
     }
     .header{
-        width: 100%;
+        width: 80%;
         height: auto;
         padding-left: 0px;
         position: absolute;
         top: 50%; 
-        left: 68%; 
+        left: 50%; 
         transform: translate(-50%, -50%); /*Center the header div*/
     }
     h2 {
@@ -497,9 +496,10 @@ li{
         margin-left: 0;  
     }
 
-    .benefits_img img{
-        width: 400px;
-        height: 300px;
+    .benefits_img video {
+        width: 320px;
+        height: 250px;
+        border-radius: 10px;
     }
     
     .about{
@@ -508,13 +508,13 @@ li{
     }
     #p1{
         font-size: 20px;
-        width: 90%;
+        width: 80%;
         margin: 20px 0;  
 
     }
     #p2{
         font-size: 20px;
-        width: 90%;
+        width: 80%;
         margin: 20px 0;
     
     }
@@ -531,5 +531,12 @@ li{
     #footer {
         width: 90%;
         text-align: center;
+    }
+}
+@media only screen and (min-width:1300px) {
+    .benefits_img video {
+        width: 640px;
+        height: 360px;
+        border-radius: 10px;
     }
 }
