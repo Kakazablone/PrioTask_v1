@@ -10,7 +10,8 @@ from models.user import User
 from models.custom import Custom
 import shlex  # for splitting the line along spaces except in double quotes
 
-classes = {"BaseModel": BaseModel, "User": User, "Task": Task, "Custom": Custom}
+classes = {"BaseModel": BaseModel, "User": User, "Task": Task,
+           "Custom": Custom}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -155,6 +156,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         else:
             print("** class doesn't exist **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
