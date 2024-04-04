@@ -176,6 +176,7 @@ section {
   cursor: pointer;
   color: var(--color-font);
 }  
+
 .login-content-section {
   display: block;
   width: 20%;
