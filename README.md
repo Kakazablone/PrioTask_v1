@@ -61,7 +61,7 @@ ___
 `python3 -m web_dynamic.priotask`
 `python3 -m api.v1.app`
 
-4. You can use *curl* to do the http methods on the terminal or click the link to open then in a browser
+4. You can use *curl* to do the http methods on the terminal or click the link to open them in a browser
 
 ___
 ## Features
