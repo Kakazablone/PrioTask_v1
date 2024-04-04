@@ -541,6 +541,11 @@ legend {
   font-family: Khand;
   font-size: 16px;
   padding: 5px;
+  /* Disable button */
+  background-color: #f0f0f0; 
+  color: #aaa; 
+  cursor: not-allowed; 
+  pointer-events: none; 
 }
 
 /* Style for the input fields */

@@ -1,1 +1,1 @@
-Should never have been empty
+This folder hosts the business logic of our web application

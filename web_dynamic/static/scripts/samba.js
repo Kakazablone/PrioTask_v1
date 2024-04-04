@@ -103,7 +103,7 @@ $(document).ready(function () {
         }
     
         $.ajax({
-            url: `http://127.0.0.1:5001/api/v1/users/${userId}/tasks/${taskId}`,
+            url: `/api/v1/users/${userId}/tasks/${taskId}`,
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({ content: content }),
@@ -123,7 +123,7 @@ $(document).ready(function () {
     $(document).on('click', ".delete-task", function() {
         const task_id = $(this).data("task-id");
         const user_id = $('body').data('user-id');
-        const url = "http://127.0.0.1:5001/api/v1/users/" + user_id + "/tasks/" + task_id;
+        const url = "/api/v1/users/" + user_id + "/tasks/" + task_id;
 
         $.ajax({
             url: url,
@@ -160,7 +160,7 @@ $(document).ready(function () {
         // Send POST request
         $.ajax({
             type: 'POST',
-            url: 'http://127.0.0.1:5001/api/v1/users/' + userId + '/tasks',
+            url: '/api/v1/users/' + userId + '/tasks',
             contentType: 'application/json',
             data: JSON.stringify({ content: $taskTextArea.val() }),
             success: function(data) {
@@ -185,7 +185,7 @@ $(document).ready(function () {
         // Send GET request
         $.ajax({
             type: 'GET',
-            url: `http://127.0.0.1:5001/api/v1/users/${userId}/tasks`,
+            url: `/api/v1/users/${userId}/tasks`,
             success: function(data) {
                 // Handle success response here
                 console.log('Tasks:', data);

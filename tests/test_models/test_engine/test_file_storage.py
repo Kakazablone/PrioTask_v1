@@ -7,20 +7,17 @@ from datetime import datetime
 import inspect
 import models
 from models.engine import file_storage
-from models.amenity import Amenity
 from models.base_model import BaseModel
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
+from models.custom import Custom
+from models.task import Task
 from models.user import User
 import json
 import os
 import pep8
 import unittest
 FileStorage = file_storage.FileStorage
-classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+classes = {"Task": Task, "BaseModel": BaseModel, "Custom": Custom,
+           "User": User}
 
 
 class TestFileStorageDocs(unittest.TestCase):
@@ -118,24 +115,21 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """ Tests method for obtaining an instance file storage"""
         storage = FileStorage()
-        dic = {"name": "Vecindad"}
-        instance = State(**dic)
+        dic = {"content": "Feels good to work in a team"}
+        instance = Task(**dic)
         storage.new(instance)
         storage.save()
         storage = FileStorage()
-        get_instance = storage.get(State, instance.id)
+        get_instance = storage.get(Task, instance.id)
         self.assertEqual(get_instance, instance)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_count(self):
         """ Tests count method file storage """
         storage = FileStorage()
-        dic = {"name": "Vecindad"}
-        state = State(**dic)
-        storage.new(state)
-        dic = {"name": "Mexico"}
-        city = City(**dic)
-        storage.new(city)
+        dic = {"content": "Almost there"}
+        task = Task(**dic)
+        storage.new(task)
         storage.save()
         c = storage.count()
         self.assertEqual(len(storage.all()), c)
