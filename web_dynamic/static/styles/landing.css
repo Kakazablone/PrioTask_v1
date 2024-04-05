@@ -20,6 +20,8 @@ body, html {
     padding: 0;
     box-sizing: border-box;
     
+    scroll-behavior: smooth;
+    scroll-padding-top: 65px;
 }
 h2{
     font-family: playfair display;
