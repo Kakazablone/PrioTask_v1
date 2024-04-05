@@ -334,6 +334,14 @@ li{
     height: 30px;
     cursor: pointer;
 }
+.Link_to_github img {
+    width: 200px;
+    height: 80px;
+}
+.Link_to_github {
+    display: flex;
+    justify-content: center;
+}
 
 
 /* Mobile */
